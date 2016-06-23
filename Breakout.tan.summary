@@ -1,0 +1,76 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tsu
+Slack          : N/A
+Required Time  : None
+Actual Time    : 5.911 ns
+From           : PS2_DAT
+To             : Breakout_KEYBOARD:KeyboardController|bitCount[5]
+From Clock     : --
+To Clock       : PS2_CLK
+Failed Paths   : 0
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 12.840 ns
+From           : Breakout_VIEW:View|leds1[4]
+To             : leds1[4]
+From Clock     : clk_50Mhz
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case th
+Slack          : N/A
+Required Time  : None
+Actual Time    : -1.053 ns
+From           : cheatKey
+To             : Breakout_CONTROL:ControlUnit|forceNextLevel
+From Clock     : --
+To Clock       : clk_50Mhz
+Failed Paths   : 0
+
+Type           : Clock Setup: 'clk_50Mhz'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 13.37 MHz ( period = 74.794 ns )
+From           : Breakout_CONTROL:ControlUnit|boot
+To             : Breakout_DATA:Datapath|obstacles[0]
+From Clock     : clk_50Mhz
+To Clock       : clk_50Mhz
+Failed Paths   : 0
+
+Type           : Clock Setup: 'PS2_CLK'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 240.50 MHz ( period = 4.158 ns )
+From           : Breakout_KEYBOARD:KeyboardController|bitCount[2]
+To             : Breakout_KEYBOARD:KeyboardController|bitCount[5]
+From Clock     : PS2_CLK
+To Clock       : PS2_CLK
+Failed Paths   : 0
+
+Type           : Clock Hold: 'PS2_CLK'
+Slack          : Not operational: Clock Skew > Data Delay
+Required Time  : None
+Actual Time    : N/A
+From           : Breakout_KEYBOARD:KeyboardController|scancode[5]
+To             : Breakout_KEYBOARD:KeyboardController|keyCode[5]
+From Clock     : PS2_CLK
+To Clock       : PS2_CLK
+Failed Paths   : 16
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 16
+
+--------------------------------------------------------------------------------------
+

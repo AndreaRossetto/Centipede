@@ -1,0 +1,835 @@
+Analysis & Synthesis report for Breakout
+Wed Mar 25 17:33:35 2015
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Registers Removed During Synthesis
+  9. Removed Registers Triggering Further Register Optimizations
+ 10. General Register Statistics
+ 11. Inverted Register Statistics
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Parameter Settings for Inferred Entity Instance: Breakout_DATA:Datapath|lpm_divide:Mod0
+ 14. Parameter Settings for Inferred Entity Instance: Breakout_DATA:Datapath|lpm_mult:Mult0
+ 15. Parameter Settings for Inferred Entity Instance: Breakout_DATA:Datapath|lpm_divide:Div0
+ 16. lpm_mult Parameter Settings by Entity Instance
+ 17. Elapsed Time Per Partition
+ 18. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                         ;
++------------------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Wed Mar 25 17:33:35 2015           ;
+; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
+; Revision Name                      ; Breakout                                        ;
+; Top-level Entity Name              ; Breakout                                        ;
+; Family                             ; Cyclone II                                      ;
+; Total logic elements               ; 5,928                                           ;
+;     Total combinational functions  ; 5,917                                           ;
+;     Dedicated logic registers      ; 375                                             ;
+; Total registers                    ; 375                                             ;
+; Total pins                         ; 46                                              ;
+; Total virtual pins                 ; 0                                               ;
+; Total memory bits                  ; 0                                               ;
+; Embedded Multiplier 9-bit elements ; 0                                               ;
+; Total PLLs                         ; 0                                               ;
++------------------------------------+-------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP2C20F484C7       ;                    ;
+; Top-level entity name                                                      ; Breakout           ; Breakout           ;
+; Family name                                                                ; Cyclone II         ; Cyclone IV GX      ;
+; Optimization Technique                                                     ; Area               ; Balanced           ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; Off                ; Off                ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; Off                ; Off                ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 2      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                             ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                         ; Library ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------------------------------+---------+
+; Breakout_CLKGENERATOR.vhd        ; yes             ; User VHDL File               ; C:/Users/Andrea/Copy/Progetto Sistemi Digitali/Progetto Breakout/Breakout/Breakout_CLKGENERATOR.vhd  ;         ;
+; Breakout_KEYBOARD.vhd            ; yes             ; User VHDL File               ; C:/Users/Andrea/Copy/Progetto Sistemi Digitali/Progetto Breakout/Breakout/Breakout_KEYBOARD.vhd      ;         ;
+; Breakout_DATA.vhd                ; yes             ; User VHDL File               ; C:/Users/Andrea/Copy/Progetto Sistemi Digitali/Progetto Breakout/Breakout/Breakout_DATA.vhd          ;         ;
+; Breakout_VIEW.vhd                ; yes             ; User VHDL File               ; C:/Users/Andrea/Copy/Progetto Sistemi Digitali/Progetto Breakout/Breakout/Breakout_VIEW.vhd          ;         ;
+; Breakout_CONTROL.vhd             ; yes             ; User VHDL File               ; C:/Users/Andrea/Copy/Progetto Sistemi Digitali/Progetto Breakout/Breakout/Breakout_CONTROL.vhd       ;         ;
+; Breakout.vhd                     ; yes             ; User VHDL File               ; C:/Users/Andrea/Copy/Progetto Sistemi Digitali/Progetto Breakout/Breakout/Breakout.vhd               ;         ;
+; lpm_divide.tdf                   ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_divide.tdf                                     ;         ;
+; abs_divider.inc                  ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/abs_divider.inc                                    ;         ;
+; sign_div_unsign.inc              ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/sign_div_unsign.inc                                ;         ;
+; aglobal130.inc                   ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/aglobal130.inc                                     ;         ;
+; db/lpm_divide_85m.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/Andrea/Copy/Progetto Sistemi Digitali/Progetto Breakout/Breakout/db/lpm_divide_85m.tdf      ;         ;
+; db/sign_div_unsign_fkh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/Andrea/Copy/Progetto Sistemi Digitali/Progetto Breakout/Breakout/db/sign_div_unsign_fkh.tdf ;         ;
+; db/alt_u_div_00f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/Andrea/Copy/Progetto Sistemi Digitali/Progetto Breakout/Breakout/db/alt_u_div_00f.tdf       ;         ;
+; db/add_sub_lkc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/Andrea/Copy/Progetto Sistemi Digitali/Progetto Breakout/Breakout/db/add_sub_lkc.tdf         ;         ;
+; db/add_sub_mkc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/Andrea/Copy/Progetto Sistemi Digitali/Progetto Breakout/Breakout/db/add_sub_mkc.tdf         ;         ;
+; lpm_mult.tdf                     ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_mult.tdf                                       ;         ;
+; lpm_add_sub.inc                  ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_add_sub.inc                                    ;         ;
+; multcore.inc                     ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/multcore.inc                                       ;         ;
+; bypassff.inc                     ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/bypassff.inc                                       ;         ;
+; altshift.inc                     ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altshift.inc                                       ;         ;
+; multcore.tdf                     ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/multcore.tdf                                       ;         ;
+; csa_add.inc                      ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/csa_add.inc                                        ;         ;
+; mpar_add.inc                     ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/mpar_add.inc                                       ;         ;
+; muleabz.inc                      ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/muleabz.inc                                        ;         ;
+; mul_lfrg.inc                     ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/mul_lfrg.inc                                       ;         ;
+; mul_boothc.inc                   ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/mul_boothc.inc                                     ;         ;
+; alt_ded_mult.inc                 ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/alt_ded_mult.inc                                   ;         ;
+; alt_ded_mult_y.inc               ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/alt_ded_mult_y.inc                                 ;         ;
+; dffpipe.inc                      ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/dffpipe.inc                                        ;         ;
+; mpar_add.tdf                     ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/mpar_add.tdf                                       ;         ;
+; lpm_add_sub.tdf                  ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_add_sub.tdf                                    ;         ;
+; addcore.inc                      ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/addcore.inc                                        ;         ;
+; look_add.inc                     ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/look_add.inc                                       ;         ;
+; alt_stratix_add_sub.inc          ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/alt_stratix_add_sub.inc                            ;         ;
+; db/add_sub_1ch.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/Andrea/Copy/Progetto Sistemi Digitali/Progetto Breakout/Breakout/db/add_sub_1ch.tdf         ;         ;
+; altshift.tdf                     ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altshift.tdf                                       ;         ;
+; db/lpm_divide_1dm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/Andrea/Copy/Progetto Sistemi Digitali/Progetto Breakout/Breakout/db/lpm_divide_1dm.tdf      ;         ;
+; db/sign_div_unsign_ckh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/Andrea/Copy/Progetto Sistemi Digitali/Progetto Breakout/Breakout/db/sign_div_unsign_ckh.tdf ;         ;
+; db/alt_u_div_ove.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/Andrea/Copy/Progetto Sistemi Digitali/Progetto Breakout/Breakout/db/alt_u_div_ove.tdf       ;         ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------------------------------+---------+
+
+
++-------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                               ;
++---------------------------------------------+---------------------------------------------+
+; Resource                                    ; Usage                                       ;
++---------------------------------------------+---------------------------------------------+
+; Estimated Total logic elements              ; 5,928                                       ;
+;                                             ;                                             ;
+; Total combinational functions               ; 5917                                        ;
+; Logic element usage by number of LUT inputs ;                                             ;
+;     -- 4 input functions                    ; 2549                                        ;
+;     -- 3 input functions                    ; 2108                                        ;
+;     -- <=2 input functions                  ; 1260                                        ;
+;                                             ;                                             ;
+; Logic elements by mode                      ;                                             ;
+;     -- normal mode                          ; 3830                                        ;
+;     -- arithmetic mode                      ; 2087                                        ;
+;                                             ;                                             ;
+; Total registers                             ; 375                                         ;
+;     -- Dedicated logic registers            ; 375                                         ;
+;     -- I/O registers                        ; 0                                           ;
+;                                             ;                                             ;
+; I/O pins                                    ; 46                                          ;
+; Embedded Multiplier 9-bit elements          ; 0                                           ;
+; Maximum fan-out node                        ; Breakout_CLKGENERATOR:ClockGenerator|cnt[0] ;
+; Maximum fan-out                             ; 349                                         ;
+; Total fan-out                               ; 19971                                       ;
+; Average fan-out                             ; 3.15                                        ;
++---------------------------------------------+---------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                            ;
++------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                     ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                ; Library Name ;
++------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------+--------------+
+; |Breakout                                      ; 5917 (0)          ; 375 (0)      ; 0           ; 0            ; 0       ; 0         ; 46   ; 0            ; |Breakout                                                                                                                          ; work         ;
+;    |Breakout_CLKGENERATOR:ClockGenerator|      ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout|Breakout_CLKGENERATOR:ClockGenerator                                                                                     ; work         ;
+;    |Breakout_CONTROL:ControlUnit|              ; 90 (90)           ; 59 (59)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout|Breakout_CONTROL:ControlUnit                                                                                             ; work         ;
+;    |Breakout_DATA:Datapath|                    ; 3400 (3241)       ; 211 (211)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout|Breakout_DATA:Datapath                                                                                                   ; work         ;
+;       |lpm_divide:Div0|                        ; 59 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout|Breakout_DATA:Datapath|lpm_divide:Div0                                                                                   ; work         ;
+;          |lpm_divide_1dm:auto_generated|       ; 59 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout|Breakout_DATA:Datapath|lpm_divide:Div0|lpm_divide_1dm:auto_generated                                                     ; work         ;
+;             |sign_div_unsign_ckh:divider|      ; 59 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout|Breakout_DATA:Datapath|lpm_divide:Div0|lpm_divide_1dm:auto_generated|sign_div_unsign_ckh:divider                         ; work         ;
+;                |alt_u_div_ove:divider|         ; 59 (59)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout|Breakout_DATA:Datapath|lpm_divide:Div0|lpm_divide_1dm:auto_generated|sign_div_unsign_ckh:divider|alt_u_div_ove:divider   ; work         ;
+;       |lpm_divide:Mod0|                        ; 87 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout|Breakout_DATA:Datapath|lpm_divide:Mod0                                                                                   ; work         ;
+;          |lpm_divide_85m:auto_generated|       ; 87 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout|Breakout_DATA:Datapath|lpm_divide:Mod0|lpm_divide_85m:auto_generated                                                     ; work         ;
+;             |sign_div_unsign_fkh:divider|      ; 87 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout|Breakout_DATA:Datapath|lpm_divide:Mod0|lpm_divide_85m:auto_generated|sign_div_unsign_fkh:divider                         ; work         ;
+;                |alt_u_div_00f:divider|         ; 87 (87)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout|Breakout_DATA:Datapath|lpm_divide:Mod0|lpm_divide_85m:auto_generated|sign_div_unsign_fkh:divider|alt_u_div_00f:divider   ; work         ;
+;       |lpm_mult:Mult0|                         ; 13 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout|Breakout_DATA:Datapath|lpm_mult:Mult0                                                                                    ; work         ;
+;          |multcore:mult_core|                  ; 13 (8)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout|Breakout_DATA:Datapath|lpm_mult:Mult0|multcore:mult_core                                                                 ; work         ;
+;             |mpar_add:padder|                  ; 5 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout|Breakout_DATA:Datapath|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                 ; work         ;
+;                |lpm_add_sub:adder[0]|          ; 5 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout|Breakout_DATA:Datapath|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                            ; work         ;
+;                   |add_sub_1ch:auto_generated| ; 5 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout|Breakout_DATA:Datapath|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_1ch:auto_generated ; work         ;
+;    |Breakout_KEYBOARD:KeyboardController|      ; 29 (29)           ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout|Breakout_KEYBOARD:KeyboardController                                                                                     ; work         ;
+;    |Breakout_VIEW:View|                        ; 2397 (2397)       ; 78 (78)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Breakout|Breakout_VIEW:View                                                                                                       ; work         ;
++------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                                                                                            ;
++--------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+
+; Register name                                                                                                                                          ; Reason for Removal                                   ;
++--------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+
+; Breakout_VIEW:View|leds4[0..2]                                                                                                                         ; Stuck at VCC due to stuck port data_in               ;
+; Breakout_VIEW:View|leds4[3..5]                                                                                                                         ; Stuck at GND due to stuck port data_in               ;
+; Breakout_VIEW:View|leds4[6]                                                                                                                            ; Stuck at VCC due to stuck port data_in               ;
+; Breakout_VIEW:View|leds2[0..5]                                                                                                                         ; Stuck at VCC due to stuck port data_in               ;
+; Breakout_VIEW:View|leds2[6]                                                                                                                            ; Stuck at GND due to stuck port data_in               ;
+; Breakout_DATA:Datapath|northBorder[0,5..8]                                                                                                             ; Stuck at GND due to stuck port data_in               ;
+; Breakout_DATA:Datapath|southBorder[0,1,4,5]                                                                                                            ; Stuck at GND due to stuck port data_in               ;
+; Breakout_DATA:Datapath|westBorder[1,4,6..9]                                                                                                            ; Stuck at GND due to stuck port data_in               ;
+; Breakout_DATA:Datapath|eastBorder[0,5,7,8]                                                                                                             ; Stuck at GND due to stuck port data_in               ;
+; Breakout_DATA:Datapath|eastBorder[1]                                                                                                                   ; Merged with Breakout_DATA:Datapath|eastBorder[2]     ;
+; Breakout_DATA:Datapath|eastBorder[2]                                                                                                                   ; Merged with Breakout_DATA:Datapath|eastBorder[3]     ;
+; Breakout_DATA:Datapath|eastBorder[3]                                                                                                                   ; Merged with Breakout_DATA:Datapath|eastBorder[4]     ;
+; Breakout_DATA:Datapath|eastBorder[4]                                                                                                                   ; Merged with Breakout_DATA:Datapath|eastBorder[6]     ;
+; Breakout_DATA:Datapath|eastBorder[6]                                                                                                                   ; Merged with Breakout_DATA:Datapath|eastBorder[9]     ;
+; Breakout_DATA:Datapath|eastBorder[9]                                                                                                                   ; Merged with Breakout_DATA:Datapath|westBorder[0]     ;
+; Breakout_DATA:Datapath|westBorder[0]                                                                                                                   ; Merged with Breakout_DATA:Datapath|westBorder[2]     ;
+; Breakout_DATA:Datapath|westBorder[2]                                                                                                                   ; Merged with Breakout_DATA:Datapath|westBorder[3]     ;
+; Breakout_DATA:Datapath|westBorder[3]                                                                                                                   ; Merged with Breakout_DATA:Datapath|westBorder[5]     ;
+; Breakout_DATA:Datapath|westBorder[5]                                                                                                                   ; Merged with Breakout_DATA:Datapath|southBorder[2]    ;
+; Breakout_DATA:Datapath|southBorder[2]                                                                                                                  ; Merged with Breakout_DATA:Datapath|southBorder[3]    ;
+; Breakout_DATA:Datapath|southBorder[3]                                                                                                                  ; Merged with Breakout_DATA:Datapath|southBorder[6]    ;
+; Breakout_DATA:Datapath|southBorder[6]                                                                                                                  ; Merged with Breakout_DATA:Datapath|southBorder[7]    ;
+; Breakout_DATA:Datapath|southBorder[7]                                                                                                                  ; Merged with Breakout_DATA:Datapath|southBorder[8]    ;
+; Breakout_DATA:Datapath|southBorder[8]                                                                                                                  ; Merged with Breakout_DATA:Datapath|northBorder[1]    ;
+; Breakout_DATA:Datapath|northBorder[1]                                                                                                                  ; Merged with Breakout_DATA:Datapath|northBorder[2]    ;
+; Breakout_DATA:Datapath|northBorder[2]                                                                                                                  ; Merged with Breakout_DATA:Datapath|northBorder[3]    ;
+; Breakout_DATA:Datapath|northBorder[3]                                                                                                                  ; Merged with Breakout_DATA:Datapath|northBorder[4]    ;
+; Breakout_VIEW:View|downBorder[0,5]                                                                                                                     ; Merged with Breakout_VIEW:View|rightBorder[0]        ;
+; Breakout_VIEW:View|leftBorder[4,7,9]                                                                                                                   ; Merged with Breakout_VIEW:View|rightBorder[0]        ;
+; Breakout_VIEW:View|upBorder[7,8]                                                                                                                       ; Merged with Breakout_VIEW:View|rightBorder[0]        ;
+; Breakout_VIEW:View|rightBorder[8]                                                                                                                      ; Merged with Breakout_VIEW:View|rightBorder[0]        ;
+; Breakout_VIEW:View|leftBorder[6]                                                                                                                       ; Merged with Breakout_VIEW:View|rightBorder[0]        ;
+; Breakout_VIEW:View|upBorder[0]                                                                                                                         ; Merged with Breakout_VIEW:View|rightBorder[0]        ;
+; Breakout_VIEW:View|rightBorder[5]                                                                                                                      ; Merged with Breakout_VIEW:View|rightBorder[0]        ;
+; Breakout_VIEW:View|downBorder[1,4]                                                                                                                     ; Merged with Breakout_VIEW:View|rightBorder[0]        ;
+; Breakout_VIEW:View|rightBorder[7]                                                                                                                      ; Merged with Breakout_VIEW:View|rightBorder[0]        ;
+; Breakout_VIEW:View|leftBorder[1]                                                                                                                       ; Merged with Breakout_VIEW:View|rightBorder[0]        ;
+; Breakout_VIEW:View|upBorder[5,6]                                                                                                                       ; Merged with Breakout_VIEW:View|rightBorder[0]        ;
+; Breakout_VIEW:View|leftBorder[8]                                                                                                                       ; Merged with Breakout_VIEW:View|rightBorder[0]        ;
+; Breakout_VIEW:View|downBorder[2]                                                                                                                       ; Merged with Breakout_VIEW:View|rightBorder[1]        ;
+; Breakout_VIEW:View|upBorder[2]                                                                                                                         ; Merged with Breakout_VIEW:View|rightBorder[1]        ;
+; Breakout_VIEW:View|downBorder[7]                                                                                                                       ; Merged with Breakout_VIEW:View|rightBorder[1]        ;
+; Breakout_VIEW:View|rightBorder[6]                                                                                                                      ; Merged with Breakout_VIEW:View|rightBorder[1]        ;
+; Breakout_VIEW:View|leftBorder[2]                                                                                                                       ; Merged with Breakout_VIEW:View|rightBorder[1]        ;
+; Breakout_VIEW:View|rightBorder[9]                                                                                                                      ; Merged with Breakout_VIEW:View|rightBorder[1]        ;
+; Breakout_VIEW:View|downBorder[6]                                                                                                                       ; Merged with Breakout_VIEW:View|rightBorder[1]        ;
+; Breakout_VIEW:View|leftBorder[0]                                                                                                                       ; Merged with Breakout_VIEW:View|rightBorder[1]        ;
+; Breakout_VIEW:View|upBorder[1]                                                                                                                         ; Merged with Breakout_VIEW:View|rightBorder[1]        ;
+; Breakout_VIEW:View|rightBorder[4]                                                                                                                      ; Merged with Breakout_VIEW:View|rightBorder[1]        ;
+; Breakout_VIEW:View|downBorder[8]                                                                                                                       ; Merged with Breakout_VIEW:View|rightBorder[1]        ;
+; Breakout_VIEW:View|rightBorder[2,3]                                                                                                                    ; Merged with Breakout_VIEW:View|rightBorder[1]        ;
+; Breakout_VIEW:View|upBorder[3]                                                                                                                         ; Merged with Breakout_VIEW:View|rightBorder[1]        ;
+; Breakout_VIEW:View|leftBorder[5]                                                                                                                       ; Merged with Breakout_VIEW:View|rightBorder[1]        ;
+; Breakout_VIEW:View|downBorder[3]                                                                                                                       ; Merged with Breakout_VIEW:View|rightBorder[1]        ;
+; Breakout_VIEW:View|upBorder[4]                                                                                                                         ; Merged with Breakout_VIEW:View|rightBorder[1]        ;
+; Breakout_VIEW:View|leftBorder[3]                                                                                                                       ; Merged with Breakout_VIEW:View|rightBorder[1]        ;
+; Breakout_DATA:Datapath|fixed[45]                                                                                                                       ; Merged with Breakout_DATA:Datapath|fissi[83]         ;
+; Breakout_DATA:Datapath|fissi[1,3,7,9,11,13..15,17,21,26,30,38,43,45,47,51,59,62,66,76..82,84..88,90,92,94,95,101,106,108]                              ; Merged with Breakout_DATA:Datapath|fissi[83]         ;
+; Breakout_DATA:Datapath|fixed[72]                                                                                                                       ; Merged with Breakout_DATA:Datapath|fissi[89]         ;
+; Breakout_DATA:Datapath|fissi[0,2,4,6,8,10,12,18..20,22..25,28,29,31..37,39..42,44,46,48..50,52..54,58,60,61,67..75,91,93,96..100,102..105,107,109,120] ; Merged with Breakout_DATA:Datapath|fissi[89]         ;
+; Breakout_DATA:Datapath|fixed[111]                                                                                                                      ; Merged with Breakout_DATA:Datapath|fissi[110]        ;
+; Breakout_DATA:Datapath|fissi[111..119]                                                                                                                 ; Merged with Breakout_DATA:Datapath|fissi[110]        ;
+; Breakout_DATA:Datapath|ballPositionH[9]                                                                                                                ; Merged with Breakout_DATA:Datapath|ballPositionX[9]  ;
+; Breakout_DATA:Datapath|ballPositionH[8]                                                                                                                ; Merged with Breakout_DATA:Datapath|ballPositionX[8]  ;
+; Breakout_DATA:Datapath|ballPositionH[2]                                                                                                                ; Merged with Breakout_DATA:Datapath|ballPositionX[2]  ;
+; Breakout_DATA:Datapath|ballPositionH[0]                                                                                                                ; Merged with Breakout_DATA:Datapath|ballPositionX[0]  ;
+; Breakout_DATA:Datapath|ballPositionV[8]                                                                                                                ; Merged with Breakout_DATA:Datapath|ballPositionY[8]  ;
+; Breakout_DATA:Datapath|ballPositionV[2]                                                                                                                ; Merged with Breakout_DATA:Datapath|ballPositionY[2]  ;
+; Breakout_DATA:Datapath|ballPositionV[0]                                                                                                                ; Merged with Breakout_DATA:Datapath|ballPositionY[0]  ;
+; Breakout_DATA:Datapath|padLeftCorner[9]                                                                                                                ; Merged with Breakout_DATA:Datapath|padLCorner[9]     ;
+; Breakout_DATA:Datapath|padLeftCorner[7]                                                                                                                ; Merged with Breakout_DATA:Datapath|padLCorner[7]     ;
+; Breakout_DATA:Datapath|padLeftCorner[6]                                                                                                                ; Merged with Breakout_DATA:Datapath|padLCorner[6]     ;
+; Breakout_DATA:Datapath|padLeftCorner[4]                                                                                                                ; Merged with Breakout_DATA:Datapath|padLCorner[4]     ;
+; Breakout_DATA:Datapath|padLeftCorner[3]                                                                                                                ; Merged with Breakout_DATA:Datapath|padLCorner[3]     ;
+; Breakout_DATA:Datapath|padLeftCorner[2]                                                                                                                ; Merged with Breakout_DATA:Datapath|padLCorner[2]     ;
+; Breakout_DATA:Datapath|padRightCorner[9]                                                                                                               ; Merged with Breakout_DATA:Datapath|padRCorner[9]     ;
+; Breakout_DATA:Datapath|padRightCorner[7]                                                                                                               ; Merged with Breakout_DATA:Datapath|padRCorner[7]     ;
+; Breakout_DATA:Datapath|padRightCorner[5]                                                                                                               ; Merged with Breakout_DATA:Datapath|padRCorner[5]     ;
+; Breakout_DATA:Datapath|padRightCorner[0]                                                                                                               ; Merged with Breakout_DATA:Datapath|padRCorner[0]     ;
+; Breakout_DATA:Datapath|padLeftCorner[0]                                                                                                                ; Merged with Breakout_DATA:Datapath|padRCorner[0]     ;
+; Breakout_DATA:Datapath|ostacoli[0]                                                                                                                     ; Merged with Breakout_DATA:Datapath|obstacles[0]      ;
+; Breakout_DATA:Datapath|ostacoli[1]                                                                                                                     ; Merged with Breakout_DATA:Datapath|obstacles[1]      ;
+; Breakout_DATA:Datapath|ostacoli[2]                                                                                                                     ; Merged with Breakout_DATA:Datapath|obstacles[2]      ;
+; Breakout_DATA:Datapath|ostacoli[3]                                                                                                                     ; Merged with Breakout_DATA:Datapath|obstacles[3]      ;
+; Breakout_DATA:Datapath|ostacoli[4]                                                                                                                     ; Merged with Breakout_DATA:Datapath|obstacles[4]      ;
+; Breakout_DATA:Datapath|ostacoli[5]                                                                                                                     ; Merged with Breakout_DATA:Datapath|obstacles[5]      ;
+; Breakout_DATA:Datapath|ostacoli[6]                                                                                                                     ; Merged with Breakout_DATA:Datapath|obstacles[6]      ;
+; Breakout_DATA:Datapath|ostacoli[7]                                                                                                                     ; Merged with Breakout_DATA:Datapath|obstacles[7]      ;
+; Breakout_DATA:Datapath|ostacoli[8]                                                                                                                     ; Merged with Breakout_DATA:Datapath|obstacles[8]      ;
+; Breakout_DATA:Datapath|ostacoli[9]                                                                                                                     ; Merged with Breakout_DATA:Datapath|obstacles[9]      ;
+; Breakout_DATA:Datapath|ostacoli[10]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[10]     ;
+; Breakout_DATA:Datapath|ostacoli[11]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[11]     ;
+; Breakout_DATA:Datapath|ostacoli[12]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[12]     ;
+; Breakout_DATA:Datapath|ostacoli[13]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[13]     ;
+; Breakout_DATA:Datapath|ostacoli[14]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[14]     ;
+; Breakout_DATA:Datapath|ostacoli[15]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[15]     ;
+; Breakout_DATA:Datapath|ostacoli[16]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[16]     ;
+; Breakout_DATA:Datapath|ostacoli[17]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[17]     ;
+; Breakout_DATA:Datapath|ostacoli[18]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[18]     ;
+; Breakout_DATA:Datapath|ostacoli[19]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[19]     ;
+; Breakout_DATA:Datapath|ostacoli[20]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[20]     ;
+; Breakout_DATA:Datapath|ostacoli[21]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[21]     ;
+; Breakout_DATA:Datapath|ostacoli[22]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[22]     ;
+; Breakout_DATA:Datapath|ostacoli[23]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[23]     ;
+; Breakout_DATA:Datapath|ostacoli[24]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[24]     ;
+; Breakout_DATA:Datapath|ostacoli[25]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[25]     ;
+; Breakout_DATA:Datapath|ostacoli[26]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[26]     ;
+; Breakout_DATA:Datapath|ostacoli[27]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[27]     ;
+; Breakout_DATA:Datapath|ostacoli[28]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[28]     ;
+; Breakout_DATA:Datapath|ostacoli[29]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[29]     ;
+; Breakout_DATA:Datapath|ostacoli[30]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[30]     ;
+; Breakout_DATA:Datapath|ostacoli[31]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[31]     ;
+; Breakout_DATA:Datapath|ostacoli[32]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[32]     ;
+; Breakout_DATA:Datapath|ostacoli[33]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[33]     ;
+; Breakout_DATA:Datapath|ostacoli[34]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[34]     ;
+; Breakout_DATA:Datapath|ostacoli[35]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[35]     ;
+; Breakout_DATA:Datapath|ostacoli[36]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[36]     ;
+; Breakout_DATA:Datapath|ostacoli[37]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[37]     ;
+; Breakout_DATA:Datapath|ostacoli[38]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[38]     ;
+; Breakout_DATA:Datapath|ostacoli[39]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[39]     ;
+; Breakout_DATA:Datapath|ostacoli[40]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[40]     ;
+; Breakout_DATA:Datapath|ostacoli[41]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[41]     ;
+; Breakout_DATA:Datapath|ostacoli[42]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[42]     ;
+; Breakout_DATA:Datapath|ostacoli[43]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[43]     ;
+; Breakout_DATA:Datapath|ostacoli[44]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[44]     ;
+; Breakout_DATA:Datapath|ostacoli[45]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[45]     ;
+; Breakout_DATA:Datapath|ostacoli[46]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[46]     ;
+; Breakout_DATA:Datapath|ostacoli[47]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[47]     ;
+; Breakout_DATA:Datapath|ostacoli[48]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[48]     ;
+; Breakout_DATA:Datapath|ostacoli[49]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[49]     ;
+; Breakout_DATA:Datapath|ostacoli[50]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[50]     ;
+; Breakout_DATA:Datapath|ostacoli[51]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[51]     ;
+; Breakout_DATA:Datapath|ostacoli[52]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[52]     ;
+; Breakout_DATA:Datapath|ostacoli[53]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[53]     ;
+; Breakout_DATA:Datapath|ostacoli[54]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[54]     ;
+; Breakout_DATA:Datapath|ostacoli[55]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[55]     ;
+; Breakout_DATA:Datapath|ostacoli[56]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[56]     ;
+; Breakout_DATA:Datapath|ostacoli[57]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[57]     ;
+; Breakout_DATA:Datapath|ostacoli[58]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[58]     ;
+; Breakout_DATA:Datapath|ostacoli[59]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[59]     ;
+; Breakout_DATA:Datapath|ostacoli[60]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[60]     ;
+; Breakout_DATA:Datapath|ostacoli[61]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[61]     ;
+; Breakout_DATA:Datapath|ostacoli[62]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[62]     ;
+; Breakout_DATA:Datapath|ostacoli[63]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[63]     ;
+; Breakout_DATA:Datapath|ostacoli[64]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[64]     ;
+; Breakout_DATA:Datapath|ostacoli[65]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[65]     ;
+; Breakout_DATA:Datapath|ostacoli[66]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[66]     ;
+; Breakout_DATA:Datapath|ostacoli[67]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[67]     ;
+; Breakout_DATA:Datapath|ostacoli[68]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[68]     ;
+; Breakout_DATA:Datapath|ostacoli[69]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[69]     ;
+; Breakout_DATA:Datapath|ostacoli[70]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[70]     ;
+; Breakout_DATA:Datapath|ostacoli[71]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[71]     ;
+; Breakout_DATA:Datapath|ostacoli[72]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[72]     ;
+; Breakout_DATA:Datapath|ostacoli[73]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[73]     ;
+; Breakout_DATA:Datapath|ostacoli[74]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[74]     ;
+; Breakout_DATA:Datapath|ostacoli[75]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[75]     ;
+; Breakout_DATA:Datapath|ostacoli[76]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[76]     ;
+; Breakout_DATA:Datapath|ostacoli[77]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[77]     ;
+; Breakout_DATA:Datapath|ostacoli[78]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[78]     ;
+; Breakout_DATA:Datapath|ostacoli[79]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[79]     ;
+; Breakout_DATA:Datapath|ostacoli[80]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[80]     ;
+; Breakout_DATA:Datapath|ostacoli[81]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[81]     ;
+; Breakout_DATA:Datapath|ostacoli[82]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[82]     ;
+; Breakout_DATA:Datapath|ostacoli[83]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[83]     ;
+; Breakout_DATA:Datapath|ostacoli[84]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[84]     ;
+; Breakout_DATA:Datapath|ostacoli[85]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[85]     ;
+; Breakout_DATA:Datapath|ostacoli[86]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[86]     ;
+; Breakout_DATA:Datapath|ostacoli[87]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[87]     ;
+; Breakout_DATA:Datapath|ostacoli[88]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[88]     ;
+; Breakout_DATA:Datapath|ostacoli[89]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[89]     ;
+; Breakout_DATA:Datapath|ostacoli[90]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[90]     ;
+; Breakout_DATA:Datapath|ostacoli[91]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[91]     ;
+; Breakout_DATA:Datapath|ostacoli[92]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[92]     ;
+; Breakout_DATA:Datapath|ostacoli[93]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[93]     ;
+; Breakout_DATA:Datapath|ostacoli[94]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[94]     ;
+; Breakout_DATA:Datapath|ostacoli[95]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[95]     ;
+; Breakout_DATA:Datapath|ostacoli[96]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[96]     ;
+; Breakout_DATA:Datapath|ostacoli[97]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[97]     ;
+; Breakout_DATA:Datapath|ostacoli[98]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[98]     ;
+; Breakout_DATA:Datapath|ostacoli[99]                                                                                                                    ; Merged with Breakout_DATA:Datapath|obstacles[99]     ;
+; Breakout_DATA:Datapath|ostacoli[100]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[100]    ;
+; Breakout_DATA:Datapath|ostacoli[101]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[101]    ;
+; Breakout_DATA:Datapath|ostacoli[102]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[102]    ;
+; Breakout_DATA:Datapath|ostacoli[103]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[103]    ;
+; Breakout_DATA:Datapath|ostacoli[104]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[104]    ;
+; Breakout_DATA:Datapath|ostacoli[105]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[105]    ;
+; Breakout_DATA:Datapath|ostacoli[106]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[106]    ;
+; Breakout_DATA:Datapath|ostacoli[107]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[107]    ;
+; Breakout_DATA:Datapath|ostacoli[108]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[108]    ;
+; Breakout_DATA:Datapath|ostacoli[109]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[109]    ;
+; Breakout_DATA:Datapath|ostacoli[110]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[110]    ;
+; Breakout_DATA:Datapath|ostacoli[111]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[111]    ;
+; Breakout_DATA:Datapath|ostacoli[112]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[112]    ;
+; Breakout_DATA:Datapath|ostacoli[113]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[113]    ;
+; Breakout_DATA:Datapath|ostacoli[114]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[114]    ;
+; Breakout_DATA:Datapath|ostacoli[115]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[115]    ;
+; Breakout_DATA:Datapath|ostacoli[116]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[116]    ;
+; Breakout_DATA:Datapath|ostacoli[117]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[117]    ;
+; Breakout_DATA:Datapath|ostacoli[118]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[118]    ;
+; Breakout_DATA:Datapath|ostacoli[119]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[119]    ;
+; Breakout_DATA:Datapath|ostacoli[120]                                                                                                                   ; Merged with Breakout_DATA:Datapath|obstacles[120]    ;
+; Breakout_DATA:Datapath|fissi[5,16,27,56,57,63,64]                                                                                                      ; Merged with Breakout_DATA:Datapath|fixed[64]         ;
+; Breakout_DATA:Datapath|fissi[55,65]                                                                                                                    ; Merged with Breakout_DATA:Datapath|fixed[65]         ;
+; Breakout_DATA:Datapath|vite[3]                                                                                                                         ; Merged with Breakout_DATA:Datapath|lives[3]          ;
+; Breakout_DATA:Datapath|vite[2]                                                                                                                         ; Merged with Breakout_DATA:Datapath|lives[2]          ;
+; Breakout_DATA:Datapath|livello[3]                                                                                                                      ; Merged with Breakout_DATA:Datapath|level[3]          ;
+; Breakout_DATA:Datapath|livello[2]                                                                                                                      ; Merged with Breakout_DATA:Datapath|level[2]          ;
+; Breakout_DATA:Datapath|livello[1]                                                                                                                      ; Merged with Breakout_DATA:Datapath|level[1]          ;
+; Breakout_DATA:Datapath|youWin                                                                                                                          ; Merged with Breakout_DATA:Datapath|victory           ;
+; Breakout_DATA:Datapath|padLeftCorner[1]                                                                                                                ; Merged with Breakout_DATA:Datapath|padRightCorner[1] ;
+; Breakout_DATA:Datapath|fissi[89]                                                                                                                       ; Merged with Breakout_DATA:Datapath|fissi[83]         ;
+; Breakout_DATA:Datapath|fixed[65]                                                                                                                       ; Merged with Breakout_DATA:Datapath|fixed[64]         ;
+; Breakout_VIEW:View|leds3[3,6]                                                                                                                          ; Merged with Breakout_VIEW:View|leds3[0]              ;
+; Breakout_VIEW:View|leds1[3]                                                                                                                            ; Merged with Breakout_VIEW:View|leds1[0]              ;
+; Breakout_DATA:Datapath|fixed[0..4,6..15,17..26,28..44,46..54,58..62,66..71,73..109,120]                                                                ; Merged with Breakout_DATA:Datapath|fissi[83]         ;
+; Breakout_DATA:Datapath|fixed[110,112..119]                                                                                                             ; Merged with Breakout_DATA:Datapath|fissi[110]        ;
+; Breakout_DATA:Datapath|padRCorner[1]                                                                                                                   ; Merged with Breakout_DATA:Datapath|padLCorner[1]     ;
+; Breakout_DATA:Datapath|padRCorner[0]                                                                                                                   ; Merged with Breakout_DATA:Datapath|padLCorner[0]     ;
+; Breakout_DATA:Datapath|fixed[5,27,55..57,63,64]                                                                                                        ; Merged with Breakout_DATA:Datapath|fixed[16]         ;
+; Breakout_VIEW:View|rightBorder[0]                                                                                                                      ; Stuck at GND due to stuck port data_in               ;
+; Breakout_VIEW:View|leds1[1]                                                                                                                            ; Stuck at GND due to stuck port data_in               ;
+; Breakout_VIEW:View|leds3[1]                                                                                                                            ; Stuck at GND due to stuck port data_in               ;
+; Breakout_DATA:Datapath|fissi[83]                                                                                                                       ; Stuck at GND due to stuck port data_in               ;
+; Breakout_VIEW:View|green_signal[0]                                                                                                                     ; Merged with Breakout_VIEW:View|red_signal[0]         ;
+; Breakout_VIEW:View|green_signal[2]                                                                                                                     ; Merged with Breakout_VIEW:View|red_signal[2]         ;
+; Total Number of Removed Registers = 483                                                                                                                ;                                                      ;
++--------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                               ;
++--------------------------------------+---------------------------+----------------------------------------+
+; Register name                        ; Reason for Removal        ; Registers Removed due to This Register ;
++--------------------------------------+---------------------------+----------------------------------------+
+; Breakout_DATA:Datapath|eastBorder[0] ; Stuck at GND              ; Breakout_VIEW:View|rightBorder[0]      ;
+;                                      ; due to stuck port data_in ;                                        ;
++--------------------------------------+---------------------------+----------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 375   ;
+; Number of registers using Synchronous Clear  ; 98    ;
+; Number of registers using Synchronous Load   ; 98    ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 75    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++----------------------------------------------------+
+; Inverted Register Statistics                       ;
++------------------------------------------+---------+
+; Inverted Register                        ; Fan out ;
++------------------------------------------+---------+
+; Breakout_DATA:Datapath|livello[0]        ; 6       ;
+; Breakout_DATA:Datapath|ballPositionV[5]  ; 7       ;
+; Breakout_DATA:Datapath|ballPositionH[7]  ; 11      ;
+; Breakout_DATA:Datapath|ballPositionH[6]  ; 11      ;
+; Breakout_DATA:Datapath|ballPositionH[5]  ; 11      ;
+; Breakout_DATA:Datapath|ballPositionH[4]  ; 11      ;
+; Breakout_DATA:Datapath|ballPositionH[3]  ; 11      ;
+; Breakout_DATA:Datapath|ballPositionH[1]  ; 9       ;
+; Breakout_DATA:Datapath|padLeftCorner[8]  ; 2       ;
+; Breakout_DATA:Datapath|padLeftCorner[5]  ; 2       ;
+; Breakout_DATA:Datapath|padRightCorner[1] ; 3       ;
+; Breakout_DATA:Datapath|padRightCorner[4] ; 2       ;
+; Breakout_DATA:Datapath|padRightCorner[2] ; 2       ;
+; Breakout_DATA:Datapath|padRightCorner[3] ; 2       ;
+; Breakout_DATA:Datapath|padRightCorner[6] ; 2       ;
+; Breakout_DATA:Datapath|padRightCorner[8] ; 2       ;
+; Breakout_DATA:Datapath|ballPositionV[1]  ; 2       ;
+; Breakout_DATA:Datapath|ballPositionV[3]  ; 3       ;
+; Breakout_DATA:Datapath|ballPositionV[4]  ; 6       ;
+; Breakout_DATA:Datapath|ballPositionV[7]  ; 6       ;
+; Breakout_DATA:Datapath|ballPositionV[6]  ; 5       ;
+; Breakout_DATA:Datapath|ballMovementV[0]  ; 12      ;
+; Breakout_DATA:Datapath|angle[0]          ; 3       ;
+; Breakout_DATA:Datapath|vite[0]           ; 3       ;
+; Breakout_DATA:Datapath|vite[1]           ; 3       ;
+; Breakout_DATA:Datapath|ballMovementH[0]  ; 1       ;
+; Total number of inverted registers = 26  ;         ;
++------------------------------------------+---------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------+
+; 3:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |Breakout|Breakout_VIEW:View|cntScrittaLampeggiante[23]         ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |Breakout|Breakout_DATA:Datapath|level[2]                       ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Breakout|Breakout_CONTROL:ControlUnit|movepadLeft              ;
+; 3:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |Breakout|Breakout_CONTROL:ControlUnit|cntpadSpeed[4]           ;
+; 3:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |Breakout|Breakout_CONTROL:ControlUnit|cntBallSpeed[21]         ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |Breakout|Breakout_KEYBOARD:KeyboardController|keyCode[6]       ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |Breakout|Breakout_DATA:Datapath|i[4]                           ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |Breakout|Breakout_DATA:Datapath|ballPositionY[8]               ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 4 LEs                ; 2 LEs                  ; Yes        ; |Breakout|Breakout_KEYBOARD:KeyboardController|breakReceived[1] ;
+; 5:1                ; 10 bits   ; 30 LEs        ; 10 LEs               ; 20 LEs                 ; Yes        ; |Breakout|Breakout_DATA:Datapath|padRCorner[9]                  ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |Breakout|Breakout_KEYBOARD:KeyboardController|bitCount[0]      ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 2 LEs                ; 4 LEs                  ; Yes        ; |Breakout|Breakout_DATA:Datapath|lives[3]                       ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 9 LEs                ; 3 LEs                  ; Yes        ; |Breakout|Breakout_VIEW:View|leds1[2]                           ;
+; 5:1                ; 5 bits    ; 15 LEs        ; 10 LEs               ; 5 LEs                  ; Yes        ; |Breakout|Breakout_VIEW:View|leds3[5]                           ;
+; 8:1                ; 4 bits    ; 20 LEs        ; 8 LEs                ; 12 LEs                 ; Yes        ; |Breakout|Breakout_DATA:Datapath|ballPositionX[2]               ;
+; 3:1                ; 24 bits   ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; No         ; |Breakout|Breakout_VIEW:View|cntScrittaLampeggiante             ;
+; 3:1                ; 27 bits   ; 54 LEs        ; 27 LEs               ; 27 LEs                 ; No         ; |Breakout|Breakout_DATA:Datapath|ostacoli                       ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; No         ; |Breakout|Breakout_DATA:Datapath|ostacoli                       ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; No         ; |Breakout|Breakout_DATA:Datapath|padLeftCorner                  ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |Breakout|Breakout_DATA:Datapath|padLeftCorner                  ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; No         ; |Breakout|Breakout_DATA:Datapath|ballPositionH                  ;
+; 3:1                ; 43 bits   ; 86 LEs        ; 43 LEs               ; 43 LEs                 ; No         ; |Breakout|Breakout_DATA:Datapath|ballPositionH                  ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |Breakout|Breakout_DATA:Datapath|ballMovementH                  ;
+; 4:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |Breakout|Breakout_DATA:Datapath|ballPositionV                  ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 14 LEs               ; 7 LEs                  ; No         ; |Breakout|Breakout_DATA:Datapath|padRightCorner                 ;
+; 5:1                ; 9 bits    ; 27 LEs        ; 18 LEs               ; 9 LEs                  ; No         ; |Breakout|Breakout_DATA:Datapath|ballPositionV                  ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 2 LEs                ; 4 LEs                  ; No         ; |Breakout|Breakout_DATA:Datapath|vite                           ;
+; 6:1                ; 10 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; No         ; |Breakout|Breakout_DATA:Datapath|ballPositionH                  ;
+; 6:1                ; 9 bits    ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; No         ; |Breakout|Breakout_DATA:Datapath|ballPositionV                  ;
+; 121:1              ; 2 bits    ; 160 LEs       ; 160 LEs              ; 0 LEs                  ; No         ; |Breakout|Breakout_DATA:Datapath|Mux3                           ;
+; 8:1                ; 6 bits    ; 30 LEs        ; 12 LEs               ; 18 LEs                 ; No         ; |Breakout|Breakout_DATA:Datapath|ballPositionH                  ;
+; 7:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; No         ; |Breakout|Breakout_DATA:Datapath|ballMovementH                  ;
+; 9:1                ; 2 bits    ; 12 LEs        ; 10 LEs               ; 2 LEs                  ; No         ; |Breakout|Breakout_CONTROL:ControlUnit|Mux3                     ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; No         ; |Breakout|Breakout_DATA:Datapath|ballMovementV                  ;
+; 355:1              ; 5 bits    ; 1180 LEs      ; 315 LEs              ; 865 LEs                ; No         ; |Breakout|Breakout_VIEW:View|blue_signal                        ;
+; 355:1              ; 6 bits    ; 1416 LEs      ; 384 LEs              ; 1032 LEs               ; No         ; |Breakout|Breakout_VIEW:View|red_signal                         ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: Breakout_DATA:Datapath|lpm_divide:Mod0 ;
++------------------------+----------------+-----------------------------------------------+
+; Parameter Name         ; Value          ; Type                                          ;
++------------------------+----------------+-----------------------------------------------+
+; LPM_WIDTHN             ; 8              ; Untyped                                       ;
+; LPM_WIDTHD             ; 8              ; Untyped                                       ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                       ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                       ;
+; LPM_PIPELINE           ; 0              ; Untyped                                       ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                       ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                       ;
+; CBXI_PARAMETER         ; lpm_divide_85m ; Untyped                                       ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                       ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                       ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                    ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                  ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                  ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                ;
++------------------------+----------------+-----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: Breakout_DATA:Datapath|lpm_mult:Mult0 ;
++------------------------------------------------+------------+--------------------------+
+; Parameter Name                                 ; Value      ; Type                     ;
++------------------------------------------------+------------+--------------------------+
+; AUTO_CARRY_CHAINS                              ; ON         ; AUTO_CARRY               ;
+; IGNORE_CARRY_BUFFERS                           ; OFF        ; IGNORE_CARRY             ;
+; AUTO_CASCADE_CHAINS                            ; ON         ; AUTO_CASCADE             ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF        ; IGNORE_CASCADE           ;
+; LPM_WIDTHA                                     ; 6          ; Untyped                  ;
+; LPM_WIDTHB                                     ; 8          ; Untyped                  ;
+; LPM_WIDTHP                                     ; 14         ; Untyped                  ;
+; LPM_WIDTHR                                     ; 14         ; Untyped                  ;
+; LPM_WIDTHS                                     ; 1          ; Untyped                  ;
+; LPM_REPRESENTATION                             ; UNSIGNED   ; Untyped                  ;
+; LPM_PIPELINE                                   ; 0          ; Untyped                  ;
+; LATENCY                                        ; 0          ; Untyped                  ;
+; INPUT_A_IS_CONSTANT                            ; YES        ; Untyped                  ;
+; INPUT_B_IS_CONSTANT                            ; NO         ; Untyped                  ;
+; USE_EAB                                        ; OFF        ; Untyped                  ;
+; MAXIMIZE_SPEED                                 ; 5          ; Untyped                  ;
+; DEVICE_FAMILY                                  ; Cyclone II ; Untyped                  ;
+; CARRY_CHAIN                                    ; MANUAL     ; Untyped                  ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT        ; TECH_MAPPER_APEX20K      ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO       ; Untyped                  ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0          ; Untyped                  ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0          ; Untyped                  ;
+; CBXI_PARAMETER                                 ; NOTHING    ; Untyped                  ;
+; INPUT_A_FIXED_VALUE                            ; Bx         ; Untyped                  ;
+; INPUT_B_FIXED_VALUE                            ; Bx         ; Untyped                  ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF        ; Untyped                  ;
++------------------------------------------------+------------+--------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: Breakout_DATA:Datapath|lpm_divide:Div0 ;
++------------------------+----------------+-----------------------------------------------+
+; Parameter Name         ; Value          ; Type                                          ;
++------------------------+----------------+-----------------------------------------------+
+; LPM_WIDTHN             ; 8              ; Untyped                                       ;
+; LPM_WIDTHD             ; 4              ; Untyped                                       ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                       ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                       ;
+; LPM_PIPELINE           ; 0              ; Untyped                                       ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                       ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                       ;
+; CBXI_PARAMETER         ; lpm_divide_1dm ; Untyped                                       ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                       ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                       ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                    ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                  ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                  ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                ;
++------------------------+----------------+-----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; lpm_mult Parameter Settings by Entity Instance                                ;
++---------------------------------------+---------------------------------------+
+; Name                                  ; Value                                 ;
++---------------------------------------+---------------------------------------+
+; Number of entity instances            ; 1                                     ;
+; Entity Instance                       ; Breakout_DATA:Datapath|lpm_mult:Mult0 ;
+;     -- LPM_WIDTHA                     ; 6                                     ;
+;     -- LPM_WIDTHB                     ; 8                                     ;
+;     -- LPM_WIDTHP                     ; 14                                    ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                              ;
+;     -- INPUT_A_IS_CONSTANT            ; YES                                   ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                    ;
+;     -- USE_EAB                        ; OFF                                   ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                  ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                    ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                    ;
++---------------------------------------+---------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:02:51     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+    Info: Processing started: Wed Mar 25 17:30:39 2015
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Breakout -c Breakout
+Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (12021): Found 2 design units, including 1 entities, in source file breakout_clkgenerator.vhd
+    Info (12022): Found design unit 1: Breakout_CLKGENERATOR-Behavioral
+    Info (12023): Found entity 1: Breakout_CLKGENERATOR
+Info (12021): Found 2 design units, including 1 entities, in source file breakout_keyboard.vhd
+    Info (12022): Found design unit 1: Breakout_KEYBOARD-Behavioral
+    Info (12023): Found entity 1: Breakout_KEYBOARD
+Warning (12019): Can't analyze file -- file Breakout_CNTROL.vhd is missing
+Info (12021): Found 2 design units, including 1 entities, in source file breakout_data.vhd
+    Info (12022): Found design unit 1: Breakout_DATA-behavior
+    Info (12023): Found entity 1: Breakout_DATA
+Info (12021): Found 2 design units, including 1 entities, in source file breakout_view.vhd
+    Info (12022): Found design unit 1: Breakout_VIEW-behavior
+    Info (12023): Found entity 1: Breakout_VIEW
+Info (12021): Found 2 design units, including 1 entities, in source file breakout_control.vhd
+    Info (12022): Found design unit 1: Breakout_CONTROL-behavior
+    Info (12023): Found entity 1: Breakout_CONTROL
+Info (12021): Found 2 design units, including 1 entities, in source file breakout.vhd
+    Info (12022): Found design unit 1: Breakout-Behavioral
+    Info (12023): Found entity 1: Breakout
+Info (12127): Elaborating entity "Breakout" for the top level hierarchy
+Info (12128): Elaborating entity "Breakout_CLKGENERATOR" for hierarchy "Breakout_CLKGENERATOR:ClockGenerator"
+Info (12128): Elaborating entity "Breakout_KEYBOARD" for hierarchy "Breakout_KEYBOARD:KeyboardController"
+Info (12128): Elaborating entity "Breakout_CONTROL" for hierarchy "Breakout_CONTROL:ControlUnit"
+Info (12128): Elaborating entity "Breakout_DATA" for hierarchy "Breakout_DATA:Datapath"
+Warning (10036): Verilog HDL or VHDL warning at Breakout_DATA.vhd(42): object "oldBallMovementV" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Breakout_DATA.vhd(43): object "oldBallMovementH" assigned a value but never read
+Warning (10542): VHDL Variable Declaration warning at Breakout_DATA.vhd(48): used initial value expression for variable "padHorizontalDimension" because variable was never assigned a value
+Warning (10036): Verilog HDL or VHDL warning at Breakout_DATA.vhd(58): object "dead" assigned a value but never read
+Warning (10542): VHDL Variable Declaration warning at Breakout_DATA.vhd(72): used initial value expression for variable "ballDirectionIsRight" because variable was never assigned a value
+Info (12128): Elaborating entity "Breakout_VIEW" for hierarchy "Breakout_VIEW:View"
+Info (278001): Inferred 3 megafunctions from design logic
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Breakout_DATA:Datapath|Mod0"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Breakout_DATA:Datapath|Mult0"
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Breakout_DATA:Datapath|Div0"
+Info (12130): Elaborated megafunction instantiation "Breakout_DATA:Datapath|lpm_divide:Mod0"
+Info (12133): Instantiated megafunction "Breakout_DATA:Datapath|lpm_divide:Mod0" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHN" = "8"
+    Info (12134): Parameter "LPM_WIDTHD" = "8"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_85m.tdf
+    Info (12023): Found entity 1: lpm_divide_85m
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_fkh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_fkh
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_00f.tdf
+    Info (12023): Found entity 1: alt_u_div_00f
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_lkc.tdf
+    Info (12023): Found entity 1: add_sub_lkc
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_mkc.tdf
+    Info (12023): Found entity 1: add_sub_mkc
+Info (12130): Elaborated megafunction instantiation "Breakout_DATA:Datapath|lpm_mult:Mult0"
+Info (12133): Instantiated megafunction "Breakout_DATA:Datapath|lpm_mult:Mult0" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHA" = "6"
+    Info (12134): Parameter "LPM_WIDTHB" = "8"
+    Info (12134): Parameter "LPM_WIDTHP" = "14"
+    Info (12134): Parameter "LPM_WIDTHR" = "14"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "YES"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
+Info (12131): Elaborated megafunction instantiation "Breakout_DATA:Datapath|lpm_mult:Mult0|multcore:mult_core", which is child of megafunction instantiation "Breakout_DATA:Datapath|lpm_mult:Mult0"
+Info (12131): Elaborated megafunction instantiation "Breakout_DATA:Datapath|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder", which is child of megafunction instantiation "Breakout_DATA:Datapath|lpm_mult:Mult0"
+Info (12131): Elaborated megafunction instantiation "Breakout_DATA:Datapath|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]", which is child of megafunction instantiation "Breakout_DATA:Datapath|lpm_mult:Mult0"
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_1ch.tdf
+    Info (12023): Found entity 1: add_sub_1ch
+Info (12131): Elaborated megafunction instantiation "Breakout_DATA:Datapath|lpm_mult:Mult0|altshift:external_latency_ffs", which is child of megafunction instantiation "Breakout_DATA:Datapath|lpm_mult:Mult0"
+Info (12130): Elaborated megafunction instantiation "Breakout_DATA:Datapath|lpm_divide:Div0"
+Info (12133): Instantiated megafunction "Breakout_DATA:Datapath|lpm_divide:Div0" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHN" = "8"
+    Info (12134): Parameter "LPM_WIDTHD" = "4"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_1dm.tdf
+    Info (12023): Found entity 1: lpm_divide_1dm
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_ckh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_ckh
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_ove.tdf
+    Info (12023): Found entity 1: alt_u_div_ove
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "leds1[1]" is stuck at GND
+    Warning (13410): Pin "leds2[0]" is stuck at VCC
+    Warning (13410): Pin "leds2[1]" is stuck at VCC
+    Warning (13410): Pin "leds2[2]" is stuck at VCC
+    Warning (13410): Pin "leds2[3]" is stuck at VCC
+    Warning (13410): Pin "leds2[4]" is stuck at VCC
+    Warning (13410): Pin "leds2[5]" is stuck at VCC
+    Warning (13410): Pin "leds2[6]" is stuck at GND
+    Warning (13410): Pin "leds3[1]" is stuck at GND
+    Warning (13410): Pin "leds4[0]" is stuck at VCC
+    Warning (13410): Pin "leds4[1]" is stuck at VCC
+    Warning (13410): Pin "leds4[2]" is stuck at VCC
+    Warning (13410): Pin "leds4[3]" is stuck at GND
+    Warning (13410): Pin "leds4[4]" is stuck at GND
+    Warning (13410): Pin "leds4[5]" is stuck at GND
+    Warning (13410): Pin "leds4[6]" is stuck at VCC
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 6037 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 4 input pins
+    Info (21059): Implemented 42 output pins
+    Info (21061): Implemented 5991 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 24 warnings
+    Info: Peak virtual memory: 568 megabytes
+    Info: Processing ended: Wed Mar 25 17:33:36 2015
+    Info: Elapsed time: 00:02:57
+    Info: Total CPU time (on all processors): 00:02:40
+
+
