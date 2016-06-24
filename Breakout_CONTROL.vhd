@@ -35,20 +35,20 @@ constant READY: STD_LOGIC_VECTOR (1 downto 0):="10";
 variable state: STD_LOGIC_VECTOR (1 downto 0):=BOOTSTRAP;
 variable cheating: STD_LOGIC:='0';
 
+-- velocitÃ  di aggiornamento del pad e della pallina
 
-
-constant padSpeed: integer range 0 to 10000000:=75000;	--MAX 10000000 più grande è, più lenta va.
-constant ballSpeed: integer range 0 to 10000000:=200000; --MAX 10000000 più grande è, più lenta va.
+constant padSpeed: integer range 0 to 10000000:=75000;	--MAX 10000000 piÃ¹ grande Ã¨, piÃ¹ lenta va.
+constant ballSpeed: integer range 0 to 10000000:=200000; --MAX 10000000 piÃ¹ grande Ã¨, piÃ¹ lenta va.
 
 variable cntpadSpeed: integer range 0 to 10000000;
 variable cntBallSpeed: integer range 0 to 10000000;
 variable start: std_logic:='0';
 
-constant keyRESET: std_logic_vector(7 downto 0):="00101101";
-constant keyPLAY: std_logic_vector(7 downto 0):="00101001";
-constant keyPAUSE: std_logic_vector(7 downto 0):="01001101";
-constant keyRIGHT: std_logic_vector(7 downto 0):="01110100";
-constant keyLEFT: std_logic_vector(7 downto 0):="01101011";
+constant keyRESET: std_logic_vector(7 downto 0):="00101101"; -- 45 DEC
+constant keyPLAY: std_logic_vector(7 downto 0):="00101001";  -- 41 DEC
+constant keyPAUSE: std_logic_vector(7 downto 0):="01001101"; -- 40 DEC
+constant keyRIGHT: std_logic_vector(7 downto 0):="01110100"; -- 116 DEC
+constant keyLEFT: std_logic_vector(7 downto 0):="01101011";  -- 107 DEC
 
 variable nextLevel: STD_LOGIC:='0';
 
@@ -75,11 +75,11 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 				boot<='0';
 				enable<='1';
 			END IF;
-		
+		-- modalitÃ  di gioco, in pausa, in gioco e ready
 		when PLAYING =>
 			IF(cntpadSpeed = padSpeed)THEN
 				cntpadSpeed:=0;
-				case keyboardData is
+				case keyboardData is -- controllo spostamento pad con tastiera
 					when keyRIGHT => movepadRight<='0'; movepadLeft<='1';
 					when keyLEFT => movepadRight<='1'; movepadLeft<='0';
 					when others => movepadRight<='1'; movepadLeft<='1';
