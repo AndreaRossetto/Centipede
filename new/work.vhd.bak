@@ -1,0 +1,9 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+package pkg is
+  type slv8_array_t is array (0 to 200) of integer range -1 to 1000;
+end package;
+
+package body pkg is
+end package body;
