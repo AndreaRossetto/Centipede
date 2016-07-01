@@ -2,6 +2,7 @@ LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+USE IEEE.math_real.ALL;
 USE work.int_array.ALL;
 
 ENTITY Centipede_DATA IS
@@ -17,10 +18,8 @@ PORT(
 		forceNextLevel: IN STD_LOGIC;
 
 		fixed: OUT STD_LOGIC_VECTOR(0 to 120);
-		obstaclesX: OUT int_array;
-		obstaclesY: OUT int_array;
-		centipedeX: OUT centi_array;
-		centipedeY: OUT centi_array;
+		obstacles: OUT int_array;
+		centipede: OUT centi_array;
 		bulletPositionX: OUT INTEGER range 0 to 1000;
 		bulletPositionY: OUT INTEGER range 0 to 500;
 		padLCorner: OUT INTEGER range 0 to 1000;
@@ -66,11 +65,9 @@ constant downBorder: integer  range 0 to 500:= 460;
 
 variable dead: STD_LOGIC :='0';
 variable angle: integer range 1 to 3:=1;
-type arrayInt is array (0 to 200) of integer range -1 to 1000;
-variable ostacoliX : arrayInt;
-variable ostacoliY : arrayInt;
-variable centiX : centi_array;
-variable centiY : centi_array;
+
+variable ostacoli: int_array;
+
 variable fissi : STD_LOGIC_VECTOR(0 to 120);
 variable youWin: STD_LOGIC:='0';
 variable vite: integer range 0 to 10:=3;
@@ -90,11 +87,15 @@ variable currentW: integer range 0 to 1000;
 variable currentE: integer range 0 to 1000;
 variable i: integer range 0 to 128:=0;
 variable ind: INTEGER range 0 to 10;
+variable indM: INTEGER range 0 to 50;
+variable x: INTEGER range 0 to 1000;
+variable y: INTEGER range 0 to 1000;
 variable cont: INTEGER range 0 to 10 := 0;
 variable mushroomS: STD_LOGIC;
 variable snakeS: STD_LOGIC;
 variable snakeHead: STD_LOGIC;
 variable inserted: STD_LOGIC;
+variable centi : centi_array;
 
 BEGIN
 WAIT UNTIL(clk'EVENT) AND (clk = '1');
@@ -110,23 +111,23 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		
 		IF (bootstrap='1') THEN	-- reset
 			livello:=1;
-			for i in 0 to 200 loop
-				ostacoliX(i) := -1;
-				ostacoliY(i) := -1;
+			for i in 0 to 50 loop
+				ostacoli(i).x := -1;
+				ostacoli(i).y := -1;
 			end loop;
-			ostacoliX(0) := 300;
-			ostacoliY(0) := 308;
-			ostacoliX(1) := 350;
-			ostacoliY(1) := 200;
+			ostacoli(0).x := 300;
+			ostacoli(0).y := 308;
+			ostacoli(1).x := 350;
+			ostacoli(1).y := 200;
 			
 			for i in 0 to 10 loop
-				centiX(i) := -1;
-				centiY(i) := -1;
+				centi(i).x := -1;
+				centi(i).y := -1;
 			end loop;
-			centiX(0) := 200;
-			centiY(0) := 150;
-			--centiX(1) := 212;
-			--centiY(1) := 150;
+			centi(0).x := 30;
+			centi(0).y := 150;
+			centi(1).x := 19;
+			centi(1).y := 150;
 			--centiX(2) := 224;
 			--centiY(2) := 150;
 			bulletPositionV:=435; -- posizione è costante
@@ -172,18 +173,48 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		end if;
 		
 		IF(toCheck2='1') THEN
-
+			for i in 0 to 10 loop
+				if centi(i).x /= -1 AND centi(i).y /= -1 then
+					centi(i).x := centi(i).x + 1;
+					if centi(i).x >= 445 then
+						vite := vite - 1;
+						IF(vite=0) THEN
+								gameOver:='1';
+								centi(0).x := 30;
+								centi(0).y := 150;
+								centi(1).x := 19;
+								centi(1).y := 150;
+								padLeftCorner:=300;
+								padRightCorner:=308;	
+						ELSE
+								centi(0).x := 30;
+								centi(0).y := 150;
+								centi(1).x := 19;
+								centi(1).y := 150;
+								padLeftCorner:=300;
+								padRightCorner:=308;		
+								goingReady<='1';		
+						END IF;
+					end if;
+				end if;
+			end loop;
 		END IF;
 		
+		toCheck2 := '0';
 		IF(enable='1' AND youWin='0' AND gameOver='0') THEN
 			if(toCheck = '1') then
 				bulletPositionV := bulletPositionV - 1;
 				mushroomS := '0';
-				for i in 0 to 200 loop
-					if ( bulletPositionH >= ostacoliY(i)-2 AND bulletPositionH <= ostacoliY(i)+8 ) then
-						if (bulletPositionV <= ostacoliX(i)+1) then
+				inserted := '0';
+				for i in 0 to 50 loop
+					if ( bulletPositionH >= ostacoli(i).y-2 AND bulletPositionH <= ostacoli(i).y+8 ) then
+						if (bulletPositionV <= ostacoli(i).x+1) then
 							mushroomS := '1';
 						end if;
+					end if;
+					if (ostacoli(i).x = -1) AND (ostacoli(i).y = -1) AND inserted = '0' then
+							indM := i;
+							inserted := '1';
 					end if;
 				end loop;
 				if bulletPositionV <= upBorder  OR mushroomS = '1' then 
@@ -195,9 +226,9 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 				cont := 0;
 				snakeHead := '0';
 				for i in 0 to 10 loop
-					if (centiX(i) /= -1) AND (centiY(i) /= -1) then
-						if ( bulletPositionH >= centiY(i)-1 AND bulletPositionH <= centiY(i)+8 ) then
-							if (bulletPositionV <= centiX(i)+1) then
+					if (centi(i).x /= -1) AND (centi(i).y /= -1) then
+						if ( bulletPositionH >= centi(i).y-1 AND bulletPositionH <= centi(i).y+8 ) then
+							if (bulletPositionV <= centi(i).x+1) then
 								snakeS := '1';
 								ind := i;
 							end if;
@@ -206,32 +237,25 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 						cont := cont + 1;
 					end if;
 				end loop;
-				if cont = 0 then
-					snakeHead := '1';
-				else
-					snakeHead := '0';
-				end if;
+				--if cont = 0 OR ind = cont+1 then
+				--	snakeHead := '1';
+				--else
+				--	snakeHead := '0';
+				--end if;
 				if (snakeS = '1') then
-					if (snakeHead = '1') then
-						inserted := '0';
-						for i in 0 to 200 loop
-							if (ostacoliX(i) /= -1) AND (ostacoliY(i) /= -1) AND inserted = '0' then
-								--ostacoliX(i) := centiX(ind);
-								--ostacoliY(i) := centiY(ind);
-								inserted := '1';
-							end if;
-						end loop;
-					else
-						
-					end if;
-					
-					centiX(ind) := -1;
-					centiY(ind) := -1;
+					inserted := '0';
+					x := centi(ind).x;
+					y := centi(ind).y;
+					ostacoli(indM).x := x;
+					ostacoli(indM).y := y;
+					centi(ind).x := -1;
+					centi(ind).y := -1;
 					toCheck := '0';
 					mushroomS := '0';
 					bulletPositionV := 435;
 				end if;
 			end if;
+
 			IF(padGoRight = '0' AND padGoLeft = '1') THEN
 				if (padRightCorner = rightBorder-15) THEN
 						padLeftCorner:=padLeftCorner;
@@ -252,13 +276,13 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 -- segnali in uscita
 		bulletPositionX <= bulletPositionV;
 		bulletPositionY <= bulletPositionH;
-		for i in 0 to 200 loop
-				obstaclesX(i) <= ostacoliX(i);
-				obstaclesY(i) <= ostacoliY(i);
+		for i in 0 to 50 loop
+				obstacles(i).x <= ostacoli(i).x;
+				obstacles(i).y <= ostacoli(i).y;
 		end loop;
 		for i in 0 to 10 loop
-				centipedeX(i) <= centiX(i);
-				centipedeY(i) <= centiY(i);
+				centipede(i).x <= centi(i).x;
+				centipede(i).y <= centi(i).y;
 		end loop;
 		padLCorner <= padLeftCorner;
 		padRCorner <= padRightCorner;

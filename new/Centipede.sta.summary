@@ -3,24 +3,24 @@ TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow Model Setup 'Centipede_CLKGENERATOR:ClockGenerator|cnt[0]'
-Slack : -16.142
-TNS   : -1502.065
+Slack : -27.033
+TNS   : -18785.177
 
 Type  : Slow Model Setup 'PS2_CLK'
-Slack : -3.054
-TNS   : -46.455
+Slack : -3.398
+TNS   : -46.748
 
 Type  : Slow Model Setup 'Centipede_KEYBOARD:KeyboardController|scancodeReady'
-Slack : -2.822
-TNS   : -16.630
+Slack : -2.299
+TNS   : -14.281
 
 Type  : Slow Model Setup 'clk_50Mhz'
 Slack : 2.116
 TNS   : 0.000
 
 Type  : Slow Model Hold 'PS2_CLK'
-Slack : -3.028
-TNS   : -3.028
+Slack : -2.833
+TNS   : -2.833
 
 Type  : Slow Model Hold 'clk_50Mhz'
 Slack : -1.864
@@ -44,31 +44,31 @@ TNS   : -21.021
 
 Type  : Slow Model Minimum Pulse Width 'Centipede_CLKGENERATOR:ClockGenerator|cnt[0]'
 Slack : -0.611
-TNS   : -250.510
+TNS   : -1080.248
 
 Type  : Slow Model Minimum Pulse Width 'Centipede_KEYBOARD:KeyboardController|scancodeReady'
 Slack : -0.611
 TNS   : -12.220
 
 Type  : Fast Model Setup 'Centipede_CLKGENERATOR:ClockGenerator|cnt[0]'
-Slack : -5.470
-TNS   : -457.437
+Slack : -9.786
+TNS   : -6591.016
 
 Type  : Fast Model Setup 'PS2_CLK'
-Slack : -0.673
-TNS   : -9.322
+Slack : -0.760
+TNS   : -9.481
 
 Type  : Fast Model Setup 'Centipede_KEYBOARD:KeyboardController|scancodeReady'
-Slack : -0.425
-TNS   : -0.576
+Slack : -0.311
+TNS   : -0.640
 
 Type  : Fast Model Setup 'clk_50Mhz'
 Slack : 1.343
 TNS   : 0.000
 
 Type  : Fast Model Hold 'PS2_CLK'
-Slack : -1.449
-TNS   : -1.449
+Slack : -1.391
+TNS   : -1.391
 
 Type  : Fast Model Hold 'clk_50Mhz'
 Slack : -0.963
@@ -92,7 +92,7 @@ TNS   : -17.222
 
 Type  : Fast Model Minimum Pulse Width 'Centipede_CLKGENERATOR:ClockGenerator|cnt[0]'
 Slack : -0.500
-TNS   : -205.000
+TNS   : -884.000
 
 Type  : Fast Model Minimum Pulse Width 'Centipede_KEYBOARD:KeyboardController|scancodeReady'
 Slack : -0.500

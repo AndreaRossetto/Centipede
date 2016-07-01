@@ -74,12 +74,10 @@ architecture Behavioral of Centipede is
 		forceNextLevel		: IN STD_LOGIC;
 
 		fixed					: OUT STD_LOGIC_VECTOR(0 to 120);
-		centipedeX			: OUT centi_array;
-		centipedeY			: OUT centi_array;
+		centipede			: OUT centi_array;
 		bulletPositionX	: OUT INTEGER range 0 to 1000;
 		bulletPositionY	: OUT INTEGER range 0 to 500;
-		obstaclesX			: OUT int_array;
-		obstaclesY			: OUT int_array;
+		obstacles			: OUT int_array;
 		padLCorner			: OUT INTEGER range 0 to 1000;
 		padRCorner			: OUT INTEGER range 0 to 1000;
 		mushroomL			: OUT INTEGER range 0 to 1000;		
@@ -102,10 +100,8 @@ architecture Behavioral of Centipede is
 		fixed					: IN STD_LOGIC_VECTOR(0 to 120);
 		bulletPositionX	: IN INTEGER range 0 to 1000;
 		bulletPositionY	: IN INTEGER range 0 to 500;
-		obstaclesX			: IN int_array;
-		obstaclesY			: IN int_array;
-		centipedeX			: IN centi_array;
-		centipedeY			: IN centi_array;
+		obstacles			: IN int_array;
+		centipede			: IN centi_array;
 		padLCorner			: IN INTEGER range 0 to 1000;
 		padRCorner			: IN INTEGER range 0 to 1000;
 		mushroomL			: IN INTEGER range 0 to 1000;
@@ -151,10 +147,8 @@ signal forceNextLevel	: STD_LOGIC;
 signal fixed				: STD_LOGIC_VECTOR(0 to 120);
 signal bulletPositionX	: INTEGER range 0 to 1000;
 signal bulletPositionY	: INTEGER range 0 to 500;
-signal obstaclesX			: int_array;
-signal obstaclesY			: int_array;
-signal centipedeX			: centi_array;
-signal centipedeY			: centi_array;
+signal obstacles			: int_array;
+signal centipede			: centi_array;
 signal padLCorner			: INTEGER range 0 to 1000;
 signal padRCorner			: INTEGER range 0 to 1000;
 signal mushroomL			: INTEGER range 0 to 1000;
@@ -215,10 +209,8 @@ Datapath: Centipede_DATA
 		forceNextLevel		=> forceNextLevel,
 
 		fixed					=> fixed,
-		obstaclesX			=> obstaclesX,
-		obstaclesY			=> obstaclesY,
-		centipedeX			=> centipedeX,
-		centipedeY			=> centipedeY,
+		obstacles			=> obstacles,
+		centipede			=> centipede,
 		bulletPositionX	=> bulletPositionX,
 		bulletPositionY	=> bulletPositionY,
 		padLCorner			=> padLCorner,
@@ -242,10 +234,8 @@ View: Centipede_VIEW
 		fixed					=> fixed,	
 		bulletPositionX	=> bulletPositionX,
 		bulletPositionY	=> bulletPositionY,
-		obstaclesX 			=> obstaclesX,
-		obstaclesY 			=> obstaclesY,
-		centipedeX			=> centipedeX,
-		centipedeY			=> centipedeY,
+		obstacles			=> obstacles,
+		centipede			=> centipede,
 		padLCorner			=> padLCorner,
 		padRCorner			=> padRCorner,
 		mushroomL 			=> mushroomL,

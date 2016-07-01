@@ -12,10 +12,8 @@ PORT(
 		fixed: IN STD_LOGIC_VECTOR(0 to 120);
 		bulletPositionX: IN INTEGER range 0 to 1000;
 		bulletPositionY: IN INTEGER range 0 to 500;
-		obstaclesX: IN int_array;
-		obstaclesY: IN int_array;
-		centipedeX: IN centi_array;
-		centipedeY: IN centi_array;
+		obstacles: IN int_array;
+		centipede: IN centi_array;
 		padLCorner: IN INTEGER range 0 to 1000;
 		padRCorner: IN INTEGER range 0 to 1000;
 		mushroomL: IN INTEGER range 0 to 1000;
@@ -202,29 +200,29 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		
 	-- fine gun drawing	
 	-- mushroom drawing
-			for i in 0 to 200 loop
-				IF (obstaclesX(i) /= -1) AND (obstaclesY(i) /= -1) THEN
-					IF (v_cnt = obstaclesX(i)-4) AND (h_cnt >= obstaclesY(i)+4) AND (h_cnt <= obstaclesY(i)+6) THEN
+			for i in 0 to 50 loop
+				IF (obstacles(i).x /= -1) AND (obstacles(i).y /= -1) THEN
+					IF (v_cnt = obstacles(i).x-4) AND (h_cnt >= obstacles(i).y+4) AND (h_cnt <= obstacles(i).y+6) THEN
 							red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
 							green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
 							blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
 						END IF;
-					IF (v_cnt = obstaclesX(i)-3) AND (h_cnt >= obstaclesY(i)+3) AND (h_cnt <= obstaclesY(i)+7) THEN
+					IF (v_cnt = obstacles(i).x-3) AND (h_cnt >= obstacles(i).y+3) AND (h_cnt <= obstacles(i).y+7) THEN
 							red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
 							green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
 							blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
 						END IF;
-					IF (v_cnt = obstaclesX(i)-2) AND (h_cnt >= obstaclesY(i)+2) AND (h_cnt <= obstaclesY(i)+8) THEN
+					IF (v_cnt = obstacles(i).x-2) AND (h_cnt >= obstacles(i).y+2) AND (h_cnt <= obstacles(i).y+8) THEN
 							red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
 							green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
 							blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
 						END IF;
-					IF (v_cnt = obstaclesX(i)-1) AND (h_cnt >= obstaclesY(i)+2) AND (h_cnt <= obstaclesY(i)+8) THEN
+					IF (v_cnt = obstacles(i).x-1) AND (h_cnt >= obstacles(i).y+2) AND (h_cnt <= obstacles(i).y+8) THEN
 							red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
 							green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
 							blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
 						END IF;
-					IF (v_cnt >= obstaclesX(i)) AND (v_cnt <= obstaclesX(i)+3) AND (h_cnt >= obstaclesY(i)+4) AND (h_cnt <= obstaclesY(i)+6) THEN
+					IF (v_cnt >= obstacles(i).x) AND (v_cnt <= obstacles(i).x+3) AND (h_cnt >= obstacles(i).y+4) AND (h_cnt <= obstacles(i).y+6) THEN
 							red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
 							green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
 							blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
@@ -236,28 +234,28 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	-- fine mushroom drawing
 	-- snake
 		for i in 0 to 10 loop
-			IF (centipedeX(i) /= -1) AND (centipedeY(i) /= -1) THEN
-				IF (v_cnt = centipedeX(i)-1) AND (h_cnt >= centipedeY(i)+1) AND (h_cnt <= centipedeY(i)+7) THEN
+			IF (centipede(i).x /= -1) AND (centipede(i).y /= -1) THEN
+				IF (v_cnt = centipede(i).x-1) AND (h_cnt >= centipede(i).y+1) AND (h_cnt <= centipede(i).y+7) THEN
 						red_signal(3) := '0';	red_signal(2) := '0';	red_signal(1) := '0';	red_signal(0) := '0';
 						green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
 						blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
 					END IF;
-				IF (v_cnt = centipedeX(i)-2) AND (h_cnt >= centipedeY(i)+2) AND (h_cnt <= centipedeY(i)+6) THEN
+				IF (v_cnt = centipede(i).x-2) AND (h_cnt >= centipede(i).y+2) AND (h_cnt <= centipede(i).y+6) THEN
 						red_signal(3) := '0';	red_signal(2) := '0';	red_signal(1) := '0';	red_signal(0) := '0';
 						green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
 						blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
 					END IF;
-				IF (v_cnt >= centipedeX(i)) AND (v_cnt <= centipedeX(i)+6) AND (h_cnt >= centipedeY(i)) AND (h_cnt <= centipedeY(i)+8) THEN
+				IF (v_cnt >= centipede(i).x) AND (v_cnt <= centipede(i).x+6) AND (h_cnt >= centipede(i).y) AND (h_cnt <= centipede(i).y+8) THEN
 						red_signal(3) := '0';	red_signal(2) := '0';	red_signal(1) := '0';	red_signal(0) := '0';
 						green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
 						blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';			
 					END IF;
-				IF (v_cnt = centipedeX(i)+7) AND (h_cnt >= centipedeY(i)+1) AND (h_cnt <= centipedeY(i)+7) THEN
+				IF (v_cnt = centipede(i).x+7) AND (h_cnt >= centipede(i).y+1) AND (h_cnt <= centipede(i).y+7) THEN
 						red_signal(3) := '0';	red_signal(2) := '0';	red_signal(1) := '0';	red_signal(0) := '0';
 						green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
 						blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
 					END IF;
-				IF (v_cnt = centipedeX(i)+8) AND (h_cnt >= centipedeY(i)+2) AND (h_cnt <= centipedeY(i)+6) THEN
+				IF (v_cnt = centipede(i).x+8) AND (h_cnt >= centipede(i).y+2) AND (h_cnt <= centipede(i).y+6) THEN
 						red_signal(3) := '0';	red_signal(2) := '0';	red_signal(1) := '0';	red_signal(0) := '0';
 						green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
 						blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		

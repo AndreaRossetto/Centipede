@@ -39,9 +39,9 @@ variable cheating: STD_LOGIC:='0';
 
 
 
-constant padSpeed: integer range 0 to 10000000:=200000;	--MAX 10000000 pi� grande �, pi� lenta va.
-constant ballSpeed: integer range 0 to 10000000:=500000; --MAX 10000000 pi� grande �, pi� lenta va.
-constant snakeSpeed: integer range 0 to 10000000:=200000; --MAX 10000000 pi� grande �, pi� lenta va.
+constant padSpeed: integer range 0 to 10000000:=200000;	--MAX 10000000 più grande è, più lenta va.
+constant ballSpeed: integer range 0 to 10000000:=900000; --MAX 10000000 più grande è, più lenta va.
+constant snakeSpeed: integer range 0 to 10000000:=500000; --MAX 10000000 più grande è, più lenta va.
 
 variable cntpadSpeed: integer range 0 to 10000000;
 variable cntBallSpeed: integer range 0 to 10000000;
