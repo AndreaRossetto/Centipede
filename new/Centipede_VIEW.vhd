@@ -2,24 +2,19 @@ LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
-USE work.int_array.ALL;
+USE work.centiarray.ALL;
 
 
 ENTITY Centipede_VIEW IS
 PORT(   
 		clk		: IN STD_LOGIC;	
 
-		fixed: IN STD_LOGIC_VECTOR(0 to 120);
 		bulletPositionX: IN INTEGER range 0 to 1000;
 		bulletPositionY: IN INTEGER range 0 to 500;
-		obstacles: IN int_array;
+		obstacles: IN mush_array;
 		centipede: IN centi_array;
 		padLCorner: IN INTEGER range 0 to 1000;
 		padRCorner: IN INTEGER range 0 to 1000;
-		mushroomL: IN INTEGER range 0 to 1000;
-		mushroomR: IN INTEGER range 0 to 1000;
-		level: IN INTEGER range 0 to 10;
-		lives: IN INTEGER range 0 to 10;
 		northBorder: IN INTEGER range 0 to 500;
 		southBorder: IN INTEGER range 0 to 500;
 		westBorder: IN INTEGER range 0 to 1000;
@@ -29,6 +24,10 @@ PORT(
 		pauseBlinking: IN STD_LOGIC;
 		readyBlinking: IN STD_LOGIC;
 		victory: IN STD_LOGIC;
+		gameOver: IN STD_LOGIC;
+		score2 : IN INTEGER range -9 to 9;
+		score1: IN INTEGER range -9 to 9;
+		score0: IN INTEGER range -9 to 9;
 		
 		hsync,
 		vsync		: OUT STD_LOGIC;
@@ -77,9 +76,6 @@ constant gameOver_v_Position: integer range 0 to 1000:=318;
 constant gameOver_e2_Position: integer range 0 to 1000:=324;
 constant gameOver_r_Position: integer range 0 to 1000:=330;
 
-constant youWin_y_Position: integer range 0 to 1000:=288;
-constant youWin_o_Position: integer range 0 to 1000:=294;
-constant youWin_u_Position: integer range 0 to 1000:=300;
 constant youWin_w_Position: integer range 0 to 1000:=312;
 constant youWin_i_Position: integer range 0 to 1000:=318;
 constant youWin_n_Position: integer range 0 to 1000:=324;
@@ -94,7 +90,7 @@ variable downBorder: integer range 0 to 500;
 variable h_sync: STD_LOGIC;
 variable v_sync: STD_LOGIC;
 			--Video Enables
-variable 	video_en	: STD_LOGIC; 
+variable video_en	: STD_LOGIC; 
 variable	horizontal_en	: STD_LOGIC;
 variable	vertical_en	: STD_LOGIC;
 			-- segnali colori RGB a 4 bit
@@ -104,10 +100,6 @@ variable	blue_signal		: std_logic_vector(3 downto 0);
 			--Sync Counters
 variable h_cnt: integer range 0 to 1000;
 variable	v_cnt : integer range 0 to 500;
-
---variable obstaclesX: arrayInt;
---variable obstaclesY: arrayInt;
-
 
 BEGIN
 WAIT UNTIL(clk'EVENT) AND (clk = '1');
@@ -123,6 +115,8 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 			leftBorder:= westBorder;
 			rightBorder:= eastBorder;
 		END IF;
+		
+		
 
 		--Horizontal Sync
 		
@@ -136,8 +130,8 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 
 			--Sfondo
 		IF (v_cnt >= 0) AND (v_cnt <= 479) THEN
-			red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-			green_signal(3) := '0'; 	green_signal(2) := '0'; 	green_signal(1) := '0'; 	green_signal(0) := '0';
+			red_signal(3) := '0';	red_signal(2) := '0';	red_signal(1) := '0';	red_signal(0) := '0';		
+			green_signal(3) := '0'; green_signal(2) := '0'; green_signal(1) := '0'; green_signal(0) := '0';
 			blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';	
 		END IF;
 
@@ -147,14 +141,10 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 				red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
 				green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
 				blue_signal(3) := '1';	blue_signal(2) := '1';	blue_signal(1) := '1';	blue_signal(0) := '1';			
-			END IF;
+		END IF;
 		-- fine bullet drawing
 		--clear screen
-		IF (v_cnt >= 430) AND (v_cnt <= 440) AND (h_cnt >= padLCorner-1) AND (h_cnt <= padLCorner) THEN
-			red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-			green_signal(3) := '0'; 	green_signal(2) := '0'; 	green_signal(1) := '0'; 	green_signal(0) := '0';
-			blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';	
-		END IF;
+
 		-- fine clear screen
 		-- gun		
 			IF (v_cnt = 430) AND (h_cnt >= padLCorner+5) AND (h_cnt <= padRCorner-5) THEN
@@ -200,47 +190,45 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		
 	-- fine gun drawing	
 	-- mushroom drawing
-			for i in 0 to 50 loop
-				IF (obstacles(i).x /= -1) AND (obstacles(i).y /= -1) THEN
-					IF (v_cnt = obstacles(i).x-4) AND (h_cnt >= obstacles(i).y+4) AND (h_cnt <= obstacles(i).y+6) THEN
-							red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
-							green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
-							blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
-						END IF;
-					IF (v_cnt = obstacles(i).x-3) AND (h_cnt >= obstacles(i).y+3) AND (h_cnt <= obstacles(i).y+7) THEN
-							red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
-							green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
-							blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
-						END IF;
-					IF (v_cnt = obstacles(i).x-2) AND (h_cnt >= obstacles(i).y+2) AND (h_cnt <= obstacles(i).y+8) THEN
-							red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
-							green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
-							blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
-						END IF;
-					IF (v_cnt = obstacles(i).x-1) AND (h_cnt >= obstacles(i).y+2) AND (h_cnt <= obstacles(i).y+8) THEN
-							red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
-							green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
-							blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
-						END IF;
-					IF (v_cnt >= obstacles(i).x) AND (v_cnt <= obstacles(i).x+3) AND (h_cnt >= obstacles(i).y+4) AND (h_cnt <= obstacles(i).y+6) THEN
-							red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
-							green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
-							blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
-						END IF;
-
-					
-				END IF;
-			end loop;
-	-- fine mushroom drawing
-	-- snake
-		for i in 0 to 10 loop
-			IF (centipede(i).x /= -1) AND (centipede(i).y /= -1) THEN
-				IF (v_cnt = centipede(i).x-1) AND (h_cnt >= centipede(i).y+1) AND (h_cnt <= centipede(i).y+7) THEN
-						red_signal(3) := '0';	red_signal(2) := '0';	red_signal(1) := '0';	red_signal(0) := '0';
+		for i in 0 to 30 loop
+			IF (obstacles(i).x /= -1) AND (obstacles(i).y /= -1) THEN
+				IF (v_cnt = obstacles(i).x-4) AND (h_cnt >= obstacles(i).y+4) AND (h_cnt <= obstacles(i).y+6) THEN
+						red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
 						green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
 						blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
 					END IF;
+				IF (v_cnt = obstacles(i).x-3) AND (h_cnt >= obstacles(i).y+3) AND (h_cnt <= obstacles(i).y+7) THEN
+						red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
+						green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
+						blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
+					END IF;
+				IF (v_cnt = obstacles(i).x-2) AND (h_cnt >= obstacles(i).y+2) AND (h_cnt <= obstacles(i).y+8) THEN
+						red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
+						green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
+						blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
+					END IF;
+				IF (v_cnt = obstacles(i).x-1) AND (h_cnt >= obstacles(i).y+2) AND (h_cnt <= obstacles(i).y+8) THEN
+						red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
+						green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
+						blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
+					END IF;
+				IF (v_cnt >= obstacles(i).x) AND (v_cnt <= obstacles(i).x+3) AND (h_cnt >= obstacles(i).y+4) AND (h_cnt <= obstacles(i).y+6) THEN
+						red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
+						green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
+						blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
+					END IF;				
+			END IF;
+		end loop;
+	-- fine mushroom drawing
+	-- snake
+		for i in 0 to 7 loop
+			IF (centipede(i).x /= -1) AND (centipede(i).y /= -1) THEN
 				IF (v_cnt = centipede(i).x-2) AND (h_cnt >= centipede(i).y+2) AND (h_cnt <= centipede(i).y+6) THEN
+						red_signal(3) := '0';	red_signal(2) := '0';	red_signal(1) := '0';	red_signal(0) := '0';
+						green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
+						blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
+				END IF;
+				IF (v_cnt = centipede(i).x-1) AND (h_cnt >= centipede(i).y+1) AND (h_cnt <= centipede(i).y+7) THEN
 						red_signal(3) := '0';	red_signal(2) := '0';	red_signal(1) := '0';	red_signal(0) := '0';
 						green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
 						blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
@@ -406,7 +394,7 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		
 -----------------------------------------------------------------------TESTI
 
-		IF(lives=0) THEN
+		IF(gameOver = '1') THEN
 		-- GAME OVER draw
 		--G
 			IF (((v_cnt = writePosition OR v_cnt = 310)) AND ((h_cnt >= gameOver_g_Position+1) AND (h_cnt <= gameOver_g_Position+3))) OR
@@ -486,32 +474,7 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		-- fine GAME OVER draw
 		END IF;
 		-- You Win
-			IF(victory='1' and not (lives=0)) THEN
-			--Y
-				IF (((v_cnt = writePosition)) AND ((h_cnt = youWin_y_Position) OR (h_cnt = youWin_y_Position+4))) OR
-				(((v_cnt = writePosition+1)) AND ((h_cnt = youWin_y_Position+1) OR (h_cnt = youWin_y_Position+3)))OR 
-				(((h_cnt = youWin_y_Position+2)) AND ((v_cnt >= writePosition+2) AND (v_cnt <= 310)))THEN
-					red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-					green_signal(3) := '1';	green_signal(2) := '0';	green_signal(1) := '0';	green_signal(0) := '0';
-					blue_signal(3) := '1';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';			
-				END IF;
-			-- fine Y			
-		--0
-			IF (((v_cnt = writePosition OR v_cnt = 310)) AND ((h_cnt >= youWin_o_Position+1) AND (h_cnt <= youWin_o_Position+3))) OR
-				(((h_cnt = youWin_o_Position OR h_cnt = youWin_o_Position+4)) AND ((v_cnt >= writePosition+1) AND (v_cnt <= writePosition+9))) THEN
-					red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-					green_signal(3) := '1';	green_signal(2) := '0';	green_signal(1) := '0';	green_signal(0) := '0';
-					blue_signal(3) := '1';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';			
-			END IF;
-		-- fine 0			
-			--U
-				IF (((v_cnt = 310)) AND ((h_cnt >= youWin_u_Position+1) AND (h_cnt <= youWin_u_Position+3))) OR 
-				(((h_cnt = youWin_u_Position OR h_cnt = youWin_u_Position+4)) AND ((v_cnt >= writePosition) AND (v_cnt <= writePosition+9))) THEN
-					red_signal(3) := '0';		red_signal(2) := '0';		red_signal(1) := '0';		red_signal(0) := '0';		
-					green_signal(3) := '1';	green_signal(2) := '0';	green_signal(1) := '0';	green_signal(0) := '0';
-					blue_signal(3) := '1';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';			
-				END IF;
-			-- fine U		
+			IF(victory='1') THEN	
 			--W
 				IF (((h_cnt = youWin_w_Position OR h_cnt = youWin_w_Position+4)) AND ((v_cnt >= writePosition) AND (v_cnt <= writePosition+9))) OR
 					(((h_cnt = youWin_w_Position+1 OR h_cnt = youWin_w_Position+3)) AND ((v_cnt = 310)))OR 
@@ -553,11 +516,6 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		--You Win
 	
 -------------------------------------------------------------------------FINE TESTI		
-
---acqua		
-
-		
--- fine acqua
 
 
 
@@ -858,22 +816,53 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 	hsync		<= h_sync;
 	vsync		<= v_sync;
 
-	leds2 <= not"1000000";
-	leds4 <= not"0111000";
-			case level is
-					when 1 => leds3 <= not"0000110";
-					when 2 => leds3 <= not"1011011";
-					when 3 => leds3 <= not"1001111";
-					when others => NULL;
-				end case;
-				
-			case lives is
-					when 0 => leds1 <= not"0111111";
-					when 1 => leds1 <= not"0000110"; 
-					when 2 => leds1 <= not"1011011";
-					when 3 => leds1 <= not"1001111"; 
-					when others => NULL;
-				end case;
+	if score0 = 0 then
+		leds1 <= not"0111111";
+	else
+		leds1 <= not"1101101";
+	end if;
+	
+	case score2 is
+		when 0 => leds3 <= not"0111111";
+		when 1 => leds3 <= not"0000110";
+		when 2 => leds3 <= not"1011011";
+		when 3 => leds3 <= not"1001111";
+		when 4 => leds3 <= not"1100110";
+		when 5 => leds3 <= not"1101101";
+		when 6 => leds3<= not"1111101";
+		when 7 => leds3 <= not"0000111";
+		when 8 => leds3 <= not"1111111";
+		when 9 => leds3 <= not"1100111";
+		when others => leds3 <= not"1111111";
+	end case;
+	case score1 is
+		when 0 => leds2 <= not"0111111";
+		when 1 => leds2 <= not"0000110";
+		when 2 => leds2 <= not"1011011";
+		when 3 => leds2 <= not"1001111";
+		when 4 => leds2 <= not"1100110";
+		when 5 => leds2 <= not"1101101";
+		when 6 => leds2 <= not"1111101";
+		when 7 => leds2 <= not"0000111";
+		when 8 => leds2 <= not"1111111";
+		when 9 => leds2 <= not"1100111";
+		when others => leds2 <= not"1111111";
+	end case;
+	case score0 is
+		when 0 => leds1 <= not"0111111";
+		when 1 => leds1 <= not"0000110";
+		when 2 => leds1 <= not"1011011";
+		when 3 => leds1 <= not"1001111";
+		when 4 => leds1 <= not"1100110";
+		when 5 => leds1 <= not"1101101";
+		when 6 => leds1 <= not"1111101";
+		when 7 => leds1 <= not"0000111";
+		when 8 => leds1 <= not"1111111";
+		when 9 => leds1 <= not"1100111";
+		when others => leds1 <= not"1111111";
+	end case;
+	
+	leds4 <= not"1110011"; -- P
 	
 END PROCESS;
 END behavior;

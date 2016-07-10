@@ -1,5 +1,5 @@
 Flow report for Centipede
-Fri Jul 01 11:25:41 2016
+Sun Jul 10 12:17:51 2016
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -40,17 +40,17 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Flow Summary                                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Flow Status                        ; Successful - Fri Jul 01 11:25:37 2016           ;
+; Flow Status                        ; Successful - Sun Jul 10 12:17:46 2016           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; Centipede                                       ;
 ; Top-level Entity Name              ; Centipede                                       ;
 ; Family                             ; Cyclone II                                      ;
 ; Device                             ; EP2C20F484C7                                    ;
 ; Timing Models                      ; Final                                           ;
-; Total logic elements               ; 11,288 / 18,752 ( 60 % )                        ;
-;     Total combinational functions  ; 11,270 / 18,752 ( 60 % )                        ;
-;     Dedicated logic registers      ; 883 / 18,752 ( 5 % )                            ;
-; Total registers                    ; 911                                             ;
+; Total logic elements               ; 18,270 / 18,752 ( 97 % )                        ;
+;     Total combinational functions  ; 18,268 / 18,752 ( 97 % )                        ;
+;     Dedicated logic registers      ; 551 / 18,752 ( 3 % )                            ;
+; Total registers                    ; 583                                             ;
 ; Total pins                         ; 46 / 315 ( 15 % )                               ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0 / 239,616 ( 0 % )                             ;
@@ -64,7 +64,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 07/01/2016 11:22:33 ;
+; Start date & time ; 07/10/2016 11:56:38 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Centipede           ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 +-------------------------------------+---------------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                                 ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+---------------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 59822810154289.146736495209444        ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 59822810154289.146814459704456        ; --            ; --          ; --         ;
 ; CYCLONEII_OPTIMIZATION_TECHNIQUE    ; Area                                  ; Balanced      ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                    ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                     ; --            ; --          ; --         ;
@@ -93,11 +93,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:01:22     ; 1.0                     ; 598 MB              ; 00:01:22                           ;
-; Fitter                    ; 00:01:35     ; 1.0                     ; 735 MB              ; 00:01:34                           ;
-; Assembler                 ; 00:00:02     ; 1.0                     ; 454 MB              ; 00:00:02                           ;
-; TimeQuest Timing Analyzer ; 00:00:03     ; 1.0                     ; 508 MB              ; 00:00:03                           ;
-; Total                     ; 00:03:02     ; --                      ; --                  ; 00:03:01                           ;
+; Analysis & Synthesis      ; 00:02:10     ; 1.0                     ; 562 MB              ; 00:02:07                           ;
+; Fitter                    ; 00:18:49     ; 1.0                     ; 808 MB              ; 00:18:01                           ;
+; Assembler                 ; 00:00:03     ; 1.0                     ; 475 MB              ; 00:00:02                           ;
+; TimeQuest Timing Analyzer ; 00:00:04     ; 1.0                     ; 597 MB              ; 00:00:04                           ;
+; Total                     ; 00:21:06     ; --                      ; --                  ; 00:20:14                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
