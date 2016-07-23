@@ -11,7 +11,7 @@ PORT(
 
 		bulletPositionX: IN INTEGER range 0 to 1000;
 		bulletPositionY: IN INTEGER range 0 to 500;
-		obstacles: IN mush_array;
+		obstacles: IN STD_LOGIC_VECTOR(2596 downto 0);
 		centipede: IN centi_array;
 		padLCorner: IN INTEGER range 0 to 1000;
 		padRCorner: IN INTEGER range 0 to 1000;
@@ -100,6 +100,10 @@ variable	blue_signal		: std_logic_vector(3 downto 0);
 			--Sync Counters
 variable h_cnt: integer range 0 to 1000;
 variable	v_cnt : integer range 0 to 500;
+
+variable row: integer range 0 to 500;
+variable col: integer range 0 to 5000;
+variable comp: integer range 0 to 5000;
 
 BEGIN
 WAIT UNTIL(clk'EVENT) AND (clk = '1');
@@ -190,34 +194,42 @@ WAIT UNTIL(clk'EVENT) AND (clk = '1');
 		
 	-- fine gun drawing	
 	-- mushroom drawing
-		for i in 0 to 30 loop
-			IF (obstacles(i).x /= -1) AND (obstacles(i).y /= -1) THEN
-				IF (v_cnt = obstacles(i).x-4) AND (h_cnt >= obstacles(i).y+4) AND (h_cnt <= obstacles(i).y+6) THEN
+		for i in 0 to 2596 loop
+			if obstacles(i) = '1' then
+			
+				row := 45 + 10 * (i / 59);
+				
+				comp := 59 * (i / 59);
+
+				col := 60 + 10 * (i-comp);
+
+				IF (v_cnt = row-4) AND (h_cnt >= col+4) AND (h_cnt <= col+6) THEN
 						red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
 						green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
 						blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
 					END IF;
-				IF (v_cnt = obstacles(i).x-3) AND (h_cnt >= obstacles(i).y+3) AND (h_cnt <= obstacles(i).y+7) THEN
+				IF (v_cnt = row-3) AND (h_cnt >= col+3) AND (h_cnt <= col+7) THEN
 						red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
 						green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
 						blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
 					END IF;
-				IF (v_cnt = obstacles(i).x-2) AND (h_cnt >= obstacles(i).y+2) AND (h_cnt <= obstacles(i).y+8) THEN
+				IF (v_cnt = row-2) AND (h_cnt >= col+2) AND (h_cnt <= col+8) THEN
 						red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
 						green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
 						blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
 					END IF;
-				IF (v_cnt = obstacles(i).x-1) AND (h_cnt >= obstacles(i).y+2) AND (h_cnt <= obstacles(i).y+8) THEN
+				IF (v_cnt = row-1) AND (h_cnt >= col+2) AND (h_cnt <= col+8) THEN
 						red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
 						green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
 						blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
 					END IF;
-				IF (v_cnt >= obstacles(i).x) AND (v_cnt <= obstacles(i).x+3) AND (h_cnt >= obstacles(i).y+4) AND (h_cnt <= obstacles(i).y+6) THEN
+				-- gambo fungo
+				IF (v_cnt >= row) AND (v_cnt <= row+3) AND (h_cnt >= col+4) AND (h_cnt <= col+6) THEN
 						red_signal(3) := '1';	red_signal(2) := '1';	red_signal(1) := '1';	red_signal(0) := '1';
 						green_signal(3) := '1';	green_signal(2) := '1';	green_signal(1) := '1';	green_signal(0) := '1';
 						blue_signal(3) := '0';	blue_signal(2) := '0';	blue_signal(1) := '0';	blue_signal(0) := '0';		
-					END IF;				
-			END IF;
+					END IF;	
+			end if;
 		end loop;
 	-- fine mushroom drawing
 	-- snake
